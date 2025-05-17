@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -16,17 +17,17 @@ export default function Index() {
         <Text style={[styles.textStyles, { fontSize: 30 }]}>Welcome</Text>
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.buttonStyles, {width: 180}]}>
+          <TouchableOpacity style={[styles.buttonStyles, {width: 180}]} onPress={() => (router.replace('/Login'))}>
             <Text>Log In</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.buttonStyles, {width: 180}]}>
+          <TouchableOpacity style={[styles.buttonStyles, {width: 180}]} onPress={() => (router.replace('/SignUp'))}>
             <Text>Sign Up</Text>
           </TouchableOpacity>
         </View>
 
 
-        <TouchableOpacity style={[styles.buttonStyles, {width: 240}]}>
+        <TouchableOpacity style={[styles.buttonStyles, {width: 240}]} onPress={() => (router.push('/SignUpHelp'))}>
           <Text>How To Sign Up?</Text>
         </TouchableOpacity>
       </View>

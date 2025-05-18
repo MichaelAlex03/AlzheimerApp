@@ -13,7 +13,7 @@ interface FormProps {
 
 const FormField = ({ title, value, placeholder, handleChangeText, handleFocus, handleBlur, width }: FormProps) => {
     return (
-        <View style={[styles.formContainer, { width: width }]}>
+        <View style={[styles.formContainer, { width: width ?? '100%' }]}>
             <Text style={styles.formText}>{title}</Text>
             <TextInput
                 value={value}

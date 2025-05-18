@@ -1,3 +1,4 @@
+import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,22 +15,27 @@ export default function Index() {
       <Text style={styles.textStyles}>NeuroNest</Text>
 
       <View style={styles.welcomeViewContainer}>
-        <Text style={[styles.textStyles, { fontSize: 30 }]}>Welcome</Text>
+        <Text style={[styles.textStyles, { fontSize: 36 }]}>Welcome</Text>
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.buttonStyles, {width: 180}]} onPress={() => (router.replace('/Login'))}>
-            <Text>Log In</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={[styles.buttonStyles, {width: 180}]} onPress={() => (router.replace('/SignUp'))}>
-            <Text>Sign Up</Text>
-          </TouchableOpacity>
+          <CustomButton
+            title={"Login"}
+            width={224}
+            onPress={() => (router.push('/Login'))}
+          />
+          <CustomButton
+            title={"Sign Up"}
+            width={224}
+            onPress={() => (router.push('/SignUp'))}
+          />
         </View>
 
 
-        <TouchableOpacity style={[styles.buttonStyles, {width: 240}]} onPress={() => (router.push('/SignUpHelp'))}>
-          <Text>How To Sign Up?</Text>
-        </TouchableOpacity>
+        <CustomButton
+          title={"How to Sign Up"}
+          width={300}
+          onPress={() => (router.push('/SignUpHelp'))}
+        />
       </View>
     </SafeAreaView>
   );
@@ -41,7 +47,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2E2466',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   welcomeViewContainer: {
     justifyContent: 'center',
@@ -55,17 +61,20 @@ const styles = StyleSheet.create({
   },
   textStyles: {
     color: '#D9D9D9',
-    fontSize: 36
+    fontSize: 48
   },
   buttonContainer: {
     alignItems: 'center',
     gap: 10
-  }, 
+  },
   buttonStyles: {
     backgroundColor: '#D9D9D9',
-    borderRadius: 10,
-    paddingVertical: 10,
+    borderRadius: 12,
+    paddingVertical: 15,
     paddingHorizontal: 64,
     alignItems: 'center'
+  },
+  buttonText: {
+    fontSize: 24
   }
 })

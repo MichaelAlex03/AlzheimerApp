@@ -88,6 +88,8 @@ const SignUp = () => {
           title='Email'
           value={email}
           handleChangeText={(e) => setEmail(e)}
+          handleFocus={() => setEmailFocus(true)}
+          handleBlur={() => setEmailFocus(false)}
           width={'100%'}
         />
 
@@ -95,6 +97,8 @@ const SignUp = () => {
           title='Password'
           value={password}
           handleChangeText={(e) => setPassword(e)}
+          handleFocus={() => setPassFocus(true)}
+          handleBlur={() => setPassFocus(false)}
           width={'100%'}
         />
 

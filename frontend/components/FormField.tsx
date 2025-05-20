@@ -9,6 +9,7 @@ interface FormProps {
     handleFocus?: () => void,
     handleBlur?: () => void
     width?: DimensionValue
+    secureTextEntry?: boolean;
 }
 
 const FormField = ({ title, value, placeholder, handleChangeText, handleFocus, handleBlur, width }: FormProps) => {
@@ -35,8 +36,8 @@ const styles = StyleSheet.create({
         gap: 10
     },
     formText: {
-        fontSize: 28,
-        color: '#D9D9D9'
+        fontSize: 22,
+        color: '#333333'
     },
     inputContainer: {
 
@@ -46,6 +47,6 @@ const styles = StyleSheet.create({
         height: 50,
         padding: 10,
         backgroundColor: '#E6E1FA',
-        borderRadius: 10.
+        borderRadius: 10,
     }
 })

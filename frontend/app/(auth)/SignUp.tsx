@@ -32,91 +32,100 @@ const SignUp = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={[styles.textStyle, { fontSize: 36, marginBottom: 50 }]}>Sign Up</Text>
+      <View style={styles.backgroundContainer} />
+      <View style={styles.overlay}>
+        <Text style={[styles.textStyle, { fontSize: 34, marginBottom: 15 }]}>
+          Sign Up
+        </Text>
 
-      <Text style={[styles.textStyle, { fontSize: 24, marginBottom: 20 }]}>Role</Text>
-      <View style={styles.roleSelectorContainer}>
-        <TouchableOpacity
-          style={
-            isProfessional
-              ? [styles.buttonStyles, { width: 160, backgroundColor: '#007AFF' }]
-              : [styles.buttonStyles, { width: 160 }]
-          }
-          onPress={() => {
-            setIsProfessional(true);
-            setIsCaregiver(false);
-          }}
-        >
-          <Text style={isProfessional ? [styles.buttonText, { color: 'white' }] : styles.buttonText}>
-            Professional
+        <View style={styles.inputContainer}>
+          <Text style={[styles.textStyle, { fontSize: 24 }]}>
+            Role
           </Text>
-        </TouchableOpacity>
+          <View style={styles.roleSelectorContainer}>
+            <TouchableOpacity
+              style={
+                isProfessional
+                  ? [styles.buttonStyles, { width: 160, backgroundColor: '#007AFF' }]
+                  : [styles.buttonStyles, { width: 160 }]
+              }
+              onPress={() => {
+                setIsProfessional(true);
+                setIsCaregiver(false);
+              }}
+            >
+              <Text style={isProfessional ? [styles.buttonText, { color: 'white' }] : styles.buttonText}>
+                Professional
+              </Text>
+            </TouchableOpacity>
 
-        <TouchableOpacity
-          style={
-            isCaregiver
-              ? [styles.buttonStyles, { width: 160, backgroundColor: '#007AFF' }]
-              : [styles.buttonStyles, { width: 160 }]
-          }
-          onPress={() => {
-            setIsCaregiver(true);
-            setIsProfessional(false);
-          }}
-        >
-          <Text style={isCaregiver ? [styles.buttonText, { color: 'white' }] : styles.buttonText}>
-            Caregiver
-          </Text>
-        </TouchableOpacity>
-      </View>
+            <TouchableOpacity
+              style={
+                isCaregiver
+                  ? [styles.buttonStyles, { width: 160, backgroundColor: '#007AFF' }]
+                  : [styles.buttonStyles, { width: 160 }]
+              }
+              onPress={() => {
+                setIsCaregiver(true);
+                setIsProfessional(false);
+              }}
+            >
+              <Text style={isCaregiver ? [styles.buttonText, { color: 'white' }] : styles.buttonText}>
+                Caregiver
+              </Text>
+            </TouchableOpacity>
+          </View>
 
-      <View style={styles.whiteBar} />
+          <View style={{ flexDirection: 'row', gap: 10 }}>
+            <FormField
+              title="First Name"
+              value={firstName}
+              handleChangeText={(e) => setFirstName(e)}
+              width={165}
+            />
+            <FormField
+              title="Last Name"
+              value={lastName}
+              handleChangeText={(e) => setLastName(e)}
+              width={165}
+            />
+          </View>
 
-      <View style={styles.textContainer}>
-        <View style={{ flexDirection: 'row', gap: 10 }}>
           <FormField
-            title="First Name"
-            value={firstName}
-            handleChangeText={(e) => setFirstName(e)}
-            width={165}
+            title="Email"
+            value={email}
+            handleChangeText={(e) => setEmail(e)}
+            handleFocus={() => setEmailFocus(true)}
+            handleBlur={() => setEmailFocus(false)}
+            width={340}
           />
+
           <FormField
-            title="Last Name"
-            value={lastName}
-            handleChangeText={(e) => setLastName(e)}
-            width={165}
+            title="Password"
+            value={password}
+            handleChangeText={(e) => setPassword(e)}
+            handleFocus={() => setPassFocus(true)}
+            handleBlur={() => setPassFocus(false)}
+            width={340}
           />
         </View>
 
-        <FormField
-          title="Email"
-          value={email}
-          handleChangeText={(e) => setEmail(e)}
-          handleFocus={() => setEmailFocus(true)}
-          handleBlur={() => setEmailFocus(false)}
-          width={340}
-        />
+        <CustomButton title="Sign Up" width={340} onPress={handleSubmit} />
 
-        <FormField
-          title="Password"
-          value={password}
-          handleChangeText={(e) => setPassword(e)}
-          handleFocus={() => setPassFocus(true)}
-          handleBlur={() => setPassFocus(false)}
-          width={340}
-        />
-      </View>
-
-      <CustomButton title="Sign Up" width={200} onPress={handleSubmit} />
-
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 20 }}>
-        <Text style={[styles.textStyle, { fontSize: 20 }]}>Already have account?</Text>
-        <TouchableOpacity
-          onPress={() => {
-            router.push('/Login');
-          }}
-        >
-          <Text style={{ color: '#007AFF', fontSize: 20 }}>Log In</Text>
-        </TouchableOpacity>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 16 }}>
+          <Text style={[styles.textStyle, { fontSize: 16 }]}>
+            Already have account?
+          </Text>
+          <TouchableOpacity
+            onPress={() => {
+              router.push('/Login');
+            }}
+          >
+            <Text style={[styles.textStyle, { fontSize: 16, color: '#007AFF' }]}>
+              Log In
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -126,38 +135,47 @@ export default SignUp;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#2E2466',
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#2E2466',
+  },
+  backgroundContainer: {
+    flex: 1,
+  },
+  overlay: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 700,
+    backgroundColor: '#FFFFFF',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingTop: 30,
+    paddingBottom: 20,
     alignItems: 'center',
-    paddingHorizontal: 15,
+  },
+  inputContainer: {
+    width: 340,
+    gap: 20,
+    marginBottom: 30,
   },
   textStyle: {
-    color: '#D9D9D9',
+    color: '#22222',
   },
   buttonStyles: {
-    backgroundColor: '#E6E1FA',
+    backgroundColor: '#DDDDDD',
     borderRadius: 12,
     paddingVertical: 10,
     alignItems: 'center',
   },
   buttonText: {
     fontSize: 18,
+    color: '#000000'
   },
   roleSelectorContainer: {
     flexDirection: 'row',
     gap: 10,
-    marginBottom: 20,
-  },
-  whiteBar: {
-    borderColor: '#D9D9D9',
-    borderWidth: 4,
-    width: 340,
-    marginVertical: 20,
-  },
-  textContainer: {
-    width: 340,
-    gap: 15,
     marginBottom: 20,
   },
 });

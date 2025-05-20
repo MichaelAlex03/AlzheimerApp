@@ -16,7 +16,7 @@ const Login = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={[styles.textStyle, { fontSize: 48, marginBottom: 40 }]}>Log In</Text>
+            <Text style={[styles.textStyle, { fontSize: 64, marginBottom: 40 }]}>Log In</Text>
 
             <View style={styles.inputContainer}>
                 <FormField
@@ -31,7 +31,7 @@ const Login = () => {
                 />
 
                 <TouchableOpacity>
-                    <Text style={[styles.textStyle, { fontSize: 28, marginLeft: 'auto', color: '#007AFF' }]}>Forgot Password?</Text>
+                    <Text style={[styles.textStyle, { fontSize: 24, marginLeft: 'auto', color: '#007AFF' }]}>Forgot Password?</Text>
                 </TouchableOpacity>
             </View>
 
@@ -40,14 +40,14 @@ const Login = () => {
             <View style={{ gap: 40, marginTop: 40 }}>
 
                 <View style={{ flexDirection: 'row', gap: 4 }}>
-                    <Text style={[styles.textStyle, { fontSize: 28 }]}>Don't have account?</Text>
+                    <Text style={[styles.textStyle, { fontSize: 24 }]}>Don't have account?</Text>
                     <TouchableOpacity onPress={() => { router.push("/SignUp") }}>
-                        <Text style={[styles.textStyle, { fontSize: 28, color: '#007AFF' }]}>Sign up</Text>
+                        <Text style={[styles.textStyle, { fontSize: 24, color: '#007AFF' }]}>Sign up</Text>
                     </TouchableOpacity>
                 </View>
 
                 <TouchableOpacity onPress={() => { router.push("/SignUpHelp") }}>
-                    <Text style={[styles.textStyle, { fontSize: 28, color: '#007AFF' }]}>Don't know how to Sign up?</Text>
+                    <Text style={[styles.textStyle, { fontSize: 20, color: '#007AFF', textAlign: 'center' }]}>Don't know how to Sign up?</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
@@ -61,12 +61,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#2E2466',
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     inputContainer: {
-        width: 586,
+        width: 340,
         gap: 30,
-        marginBottom: 40
+        marginBottom: 40,
     },
     textStyle: {
         color: '#D9D9D9'

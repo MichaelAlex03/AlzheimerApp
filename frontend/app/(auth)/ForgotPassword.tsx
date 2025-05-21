@@ -12,10 +12,10 @@ const ForgotPassword = () => {
   const resetPassword = () => {
     Alert.alert(
       'Password Reset',
-      'If this email is associated with an account, a reset link will be sent.',
+      'A reset link has been sent to your email. Please check your junk folder if you do not see the reset password email.',
       [
         {
-          text: 'OK',
+          text: 'Check email now',
           onPress: () => {
             router.push('/');
           },

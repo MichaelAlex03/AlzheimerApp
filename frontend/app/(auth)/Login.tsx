@@ -49,10 +49,15 @@ const Login = () => {
         </View>
 
         <CustomButton
-          title="Sign In"
-          width={340}
-          onPress={handleLogin}
+            title="Sign In"
+            width={340}
+            onPress={() => {
+                handleLogin();
+                router.push('/Landing');
+            }}
         />
+
+
 
         <View style={{ flexDirection: 'row', gap: 10 }}>
           <Text style={[styles.textStyle, { fontSize: 16, marginTop: 16 }]}>

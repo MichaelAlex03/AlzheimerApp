@@ -6,6 +6,7 @@ const SignUpHelpLayout = () => {
   return (
     <Stack>
       <Stack.Screen name='SignUpHelp' options={{ headerShown: false }} />
+      <Stack.Screen name='ForgotPassword' options={{ headerShown: false }} />
     </Stack>
   )
 }

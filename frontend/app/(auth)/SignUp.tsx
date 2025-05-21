@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '@/components/CustomButton';
@@ -32,101 +32,103 @@ const SignUp = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.backgroundContainer} />
-      <View style={styles.overlay}>
-        <Text style={[styles.textStyle, { fontSize: 34, marginBottom: 15 }]}>
-          Sign Up
-        </Text>
+      {/* KeyboardAvoidingView to handle keyboard interaction */}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.overlay}
+      >
+        <ScrollView
+          contentContainerStyle={{ alignItems: 'center', paddingBottom: 40 }}
+          keyboardShouldPersistTaps="handled"
+        >
+          <Text style={[styles.textStyle, { fontSize: 30 }]}>Sign Up</Text>
 
-        <View style={styles.inputContainer}>
-          <Text style={[styles.textStyle, { fontSize: 24 }]}>
-            Role
-          </Text>
-          <View style={styles.roleSelectorContainer}>
-            <TouchableOpacity
-              style={
-                isProfessional
-                  ? [styles.buttonStyles, { width: 160, backgroundColor: '#007AFF' }]
-                  : [styles.buttonStyles, { width: 160 }]
-              }
-              onPress={() => {
-                setIsProfessional(true);
-                setIsCaregiver(false);
-              }}
-            >
-              <Text style={isProfessional ? [styles.buttonText, { color: 'white' }] : styles.buttonText}>
-                Professional
-              </Text>
-            </TouchableOpacity>
+          <View style={styles.inputContainer}>
+            <Text style={[styles.textStyle, { fontSize: 24 }]}>Role</Text>
+            <View style={styles.roleSelectorContainer}>
+              <TouchableOpacity
+                style={
+                  isProfessional
+                    ? [styles.buttonStyles, { width: 160, backgroundColor: '#007AFF' }]
+                    : [styles.buttonStyles, { width: 160 }]
+                }
+                onPress={() => {
+                  setIsProfessional(true);
+                  setIsCaregiver(false);
+                }}
+              >
+                <Text style={isProfessional ? [styles.buttonText, { color: 'white' }] : styles.buttonText}>
+                  Professional
+                </Text>
+              </TouchableOpacity>
 
-            <TouchableOpacity
-              style={
-                isCaregiver
-                  ? [styles.buttonStyles, { width: 160, backgroundColor: '#007AFF' }]
-                  : [styles.buttonStyles, { width: 160 }]
-              }
-              onPress={() => {
-                setIsCaregiver(true);
-                setIsProfessional(false);
-              }}
-            >
-              <Text style={isCaregiver ? [styles.buttonText, { color: 'white' }] : styles.buttonText}>
-                Caregiver
-              </Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={
+                  isCaregiver
+                    ? [styles.buttonStyles, { width: 160, backgroundColor: '#007AFF' }]
+                    : [styles.buttonStyles, { width: 160 }]
+                }
+                onPress={() => {
+                  setIsCaregiver(true);
+                  setIsProfessional(false);
+                }}
+              >
+                <Text style={isCaregiver ? [styles.buttonText, { color: 'white' }] : styles.buttonText}>
+                  Caregiver
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={{ flexDirection: 'row', gap: 10 }}>
+              <FormField
+                title="First Name"
+                value={firstName}
+                handleChangeText={(e) => setFirstName(e)}
+                width={165}
+              />
+              <FormField
+                title="Last Name"
+                value={lastName}
+                handleChangeText={(e) => setLastName(e)}
+                width={165}
+              />
+            </View>
+
+            <FormField
+              title="Email"
+              value={email}
+              handleChangeText={(e) => setEmail(e)}
+              handleFocus={() => setEmailFocus(true)}
+              handleBlur={() => setEmailFocus(false)}
+              width={340}
+            />
+
+            <FormField
+              title="Password"
+              value={password}
+              handleChangeText={(e) => setPassword(e)}
+              handleFocus={() => setPassFocus(true)}
+              handleBlur={() => setPassFocus(false)}
+              width={340}
+            />
           </View>
 
-          <View style={{ flexDirection: 'row', gap: 10 }}>
-            <FormField
-              title="First Name"
-              value={firstName}
-              handleChangeText={(e) => setFirstName(e)}
-              width={165}
-            />
-            <FormField
-              title="Last Name"
-              value={lastName}
-              handleChangeText={(e) => setLastName(e)}
-              width={165}
-            />
+          <CustomButton title="Sign Up" width={340} onPress={handleSubmit} />
+          <CustomButton
+            title="Sign Up With Apple "
+            width={340}
+            onPress={handleSubmit}
+            containerStyle={{ backgroundColor: '#222222', marginTop: 10 }}
+          />
+
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 16 }}>
+            <Text style={[styles.textStyle, { fontSize: 16 }]}>Already have account?</Text>
+            <TouchableOpacity onPress={() => router.push('/Login')}>
+              <Text style={[styles.textStyle, { fontSize: 16, color: '#007AFF' }]}>Log In</Text>
+            </TouchableOpacity>
           </View>
-
-          <FormField
-            title="Email"
-            value={email}
-            handleChangeText={(e) => setEmail(e)}
-            handleFocus={() => setEmailFocus(true)}
-            handleBlur={() => setEmailFocus(false)}
-            width={340}
-          />
-
-          <FormField
-            title="Password"
-            value={password}
-            handleChangeText={(e) => setPassword(e)}
-            handleFocus={() => setPassFocus(true)}
-            handleBlur={() => setPassFocus(false)}
-            width={340}
-          />
-        </View>
-
-        <CustomButton title="Sign Up" width={340} onPress={handleSubmit} />
-
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 16 }}>
-          <Text style={[styles.textStyle, { fontSize: 16 }]}>
-            Already have account?
-          </Text>
-          <TouchableOpacity
-            onPress={() => {
-              router.push('/Login');
-            }}
-          >
-            <Text style={[styles.textStyle, { fontSize: 16, color: '#007AFF' }]}>
-              Log In
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -142,18 +144,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   overlay: {
+    flex: 1,
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    height: 700,
     backgroundColor: '#FFFFFF',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingHorizontal: 20,
     paddingTop: 30,
     paddingBottom: 20,
-    alignItems: 'center',
   },
   inputContainer: {
     width: 340,
@@ -171,11 +172,10 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18,
-    color: '#000000'
+    color: '#000000',
   },
   roleSelectorContainer: {
     flexDirection: 'row',
     gap: 10,
-    marginBottom: 20,
   },
 });

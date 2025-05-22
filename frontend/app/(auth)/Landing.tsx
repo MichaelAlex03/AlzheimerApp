@@ -5,7 +5,6 @@ const Landing = () => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
-        {/* Header */}
         <View style={styles.header}>
           <View style={styles.profileContainer}>
             <View style={styles.profileIcon} />
@@ -15,13 +14,11 @@ const Landing = () => {
           </TouchableOpacity>
         </View>
 
-        {/* Start New Task */}
         <Text style={styles.sectionTitle}>Start New Task</Text>
         <TouchableOpacity style={styles.imageUpload}>
           <Text style={styles.imageText}>Click to Add Image Here</Text>
         </TouchableOpacity>
 
-        {/* In Progress Tasks */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Task In Progress</Text>
           <TouchableOpacity>
@@ -42,7 +39,6 @@ const Landing = () => {
             <Text style={styles.taskText}>Status: N/A</Text>
             <Text style={styles.taskName}>Task Name</Text>
           </View>
-          {/* Add more tasks to demonstrate horizontal scrolling */}
           <View style={styles.taskCard}>
             <View style={styles.placeholderImage} />
             <Text style={styles.taskText}>Status: In Progress</Text>
@@ -50,7 +46,6 @@ const Landing = () => {
           </View>
         </ScrollView>
 
-        {/* Completed Tasks */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Completed Task</Text>
           <TouchableOpacity>
@@ -66,14 +61,12 @@ const Landing = () => {
             <View style={styles.placeholderImage} />
             <Text style={styles.taskName}>Task Name</Text>
           </View>
-          {/* Add more tasks to demonstrate horizontal scrolling */}
           <View style={styles.taskCard}>
             <View style={styles.placeholderImage} />
             <Text style={styles.taskName}>Task 3</Text>
           </View>
         </ScrollView>
 
-        {/* All Tasks */}
         <Text style={styles.sectionTitle}>All Tasks</Text>
         <View style={styles.taskRow}>
           <Image
@@ -81,13 +74,10 @@ const Landing = () => {
             style={styles.taskImage}
           />
           <View style={styles.taskDetails}>
-            <Text style={styles.taskName}>Task 1</Text>
-            <Text style={styles.taskText}>Status: In Progress</Text>
           </View>
         </View>
       </ScrollView>
 
-      {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
         <TouchableOpacity style={styles.navItem}>
           <Text style={styles.navIcon}>🏠</Text>
@@ -197,7 +187,7 @@ const styles = StyleSheet.create({
   placeholderImage: {
     width: '100%',
     height: 80,
-    backgroundColor: '#C14444',
+    backgroundColor: '#444',
     borderRadius: 8,
     marginBottom: 6,
   },

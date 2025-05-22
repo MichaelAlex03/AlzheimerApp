@@ -41,7 +41,7 @@ const SignUp = () => {
           contentContainerStyle={{ alignItems: 'center', paddingBottom: 40 }}
           keyboardShouldPersistTaps="handled"
         >
-          <Text style={[styles.textStyle, { fontSize: 30 }]}>Sign Up</Text>
+          <Text style={[styles.textStyle, { fontSize: 30 }]} >Sign Up</Text>
 
           <View style={styles.inputContainer}>
             <Text style={[styles.textStyle, { fontSize: 24 }]}>Role</Text>

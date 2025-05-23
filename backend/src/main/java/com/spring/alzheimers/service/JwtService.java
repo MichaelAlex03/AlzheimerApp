@@ -27,7 +27,7 @@ public class JwtService {
     @Value("${security.jwt.expiration-time}")
     private long jwtExpiration;
 
-    public String extractEmail(String token){
+    public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);
     }
 
@@ -75,7 +75,7 @@ public class JwtService {
 
     //Using email as subject as it is unique for each user
     public boolean isTokenValid(String token, UserDetails userDetails){
-        final String email = extractEmail(token);
+        final String email = extractUsername(token);
         return (userDetails.getUsername().equals(email) && !isTokenExpired(token));
     }
 

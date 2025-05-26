@@ -35,6 +35,7 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String password;
+    @Setter
     private Boolean enabled;
 
     @Getter
@@ -45,7 +46,7 @@ public class User implements UserDetails {
     @Getter
     @Setter
     @Column(name = "verification_expiration")
-    private LocalDateTime verificationExpiration;
+    private LocalDateTime verificationCodeExpiresAt;
 
     @Getter
     @Setter

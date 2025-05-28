@@ -1,18 +1,33 @@
 import { View, Text } from 'react-native'
-import React, { useState } from 'react'
+import React, { createContext, ReactNode, useState } from 'react'
 
-interface AuthProps{
+interface AuthProps {
     accessToken: string
+    email: string
 }
 
-const AuthContext = () => {
-    const [auth, setAuth] = useState({} as AuthProps);
-    
+interface AuthContextType{
+    auth: AuthProps
+    setAuth: (auth: AuthProps) => void
+    loggedIn: boolean
+    setIsLoggedIn: (val: boolean) => void
+}
+
+interface AuthProviderProps{
+    children: ReactNode
+}
+
+const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+
+const AuthProvider = ({ children }: AuthProviderProps ) => {
+    const [auth, setAuth] = useState<AuthProps>({} as AuthProps);
+    const [loggedIn, setIsLoggedIn] = useState(false);
+
 
     return (
-        <View>
-            <Text>AuthContext</Text>
-        </View>
+        <AuthContext.Provider value={{ auth, setAuth, loggedIn, setIsLoggedIn} } >
+            { children }
+        </AuthContext.Provider >
     )
 }
 

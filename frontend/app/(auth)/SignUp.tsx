@@ -31,16 +31,22 @@ const SignUp = () => {
     setValidPass(PASSWORD_REGEX.test(password));
   }, [password]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+
+    const userType = isCaregiver ? "Caregiver": "Professional";
+
     let body = {
       firstName,
       lastName,
       password,
       email,
+      userType
     }
 
     try {
-      
+        await axios.post(SIGN_UP_URL, {
+          body
+        })
     } catch (error) {
       
     }

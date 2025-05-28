@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TextInput, DimensionValue } from 'react-native'
 import React from 'react'
 
 interface FormProps {
-    title: string,
+    title?: string,
     value: string,
     placeholder?: string,
     handleChangeText: (val: string) => void,
@@ -38,9 +38,6 @@ const styles = StyleSheet.create({
     formText: {
         fontSize: 22,
         color: '#333333'
-    },
-    inputContainer: {
-
     },
     input: {
         width: '100%',

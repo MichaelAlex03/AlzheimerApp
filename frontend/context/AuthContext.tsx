@@ -4,6 +4,7 @@ import React, { createContext, ReactNode, useState } from 'react'
 interface AuthProps {
     accessToken: string
     email: string
+    enabled: boolean
 }
 
 interface AuthContextType{

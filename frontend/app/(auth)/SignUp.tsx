@@ -44,9 +44,11 @@ const SignUp = () => {
     }
 
     try {
-        await axios.post(SIGN_UP_URL, {
-          body
-        })
+        // await axios.post(SIGN_UP_URL, {
+        //   body
+        // })
+
+        router.push("/ConfirmSignUp")
     } catch (error) {
       
     }

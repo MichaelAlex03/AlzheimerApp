@@ -56,11 +56,12 @@ public class User implements UserDetails {
     @Column(name = "refresh_token")
     private String refreshToken;
 
-    public User(String firstName, String lastName, String email, String password){
+    public User(String firstName, String lastName, String email, String password, String userType){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.userType = userType;
     }
 
 

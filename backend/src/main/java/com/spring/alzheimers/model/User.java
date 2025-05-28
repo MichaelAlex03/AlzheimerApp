@@ -53,6 +53,9 @@ public class User implements UserDetails {
     @Column(name = "user_type")
     private String userType;
 
+    @Column(name = "refresh_token")
+    private String refreshToken;
+
     public User(String firstName, String lastName, String email, String password){
         this.firstName = firstName;
         this.lastName = lastName;

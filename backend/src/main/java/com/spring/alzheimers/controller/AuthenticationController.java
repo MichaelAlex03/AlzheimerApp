@@ -68,4 +68,9 @@ public class AuthenticationController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/refresh")
+    public ResponseEntity<?> refreshToken(){
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 }

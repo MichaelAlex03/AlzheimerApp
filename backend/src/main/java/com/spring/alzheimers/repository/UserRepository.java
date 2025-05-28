@@ -7,7 +7,7 @@ import com.spring.alzheimers.model.User;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
-    Optional<User> findByVerificationCode(String verificationCode);
+    Optional<User> findByVerificationCode(Integer verificationCode);
 }

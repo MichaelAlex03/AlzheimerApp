@@ -11,12 +11,13 @@ public class AlzheimersApplication {
 	public static void main(String[] args) {
 
 		Dotenv dotenv = Dotenv.load();
-		System.setProperty("SPRING_DATASOURCE_URL", dotenv.get("SPRING_DATASOURCE_URL"));
-		System.setProperty("SPRING_DATASOURCE_USERNAME", dotenv.get("SPRING_DATASOURCE_USERNAME"));
-		System.setProperty("SPRING_DATASOURCE_PASSWORD", dotenv.get("SPRING_DATASOURCE_PASSWORD"));
-		System.setProperty("SECURITY_JWT_SECRET", dotenv.get("JWT_SECRET_KEY"));
-		System.setProperty("SUPPORT_EMAIL", dotenv.get("SUPPORT_EMAIL"));
-		System.setProperty("APP_PASSWORD", dotenv.get("APP_PASSWORD"));
+		System.setProperty("spring.datasource.url", dotenv.get("SPRING_DATASOURCE_URL"));
+		System.setProperty("spring.datasource.username", dotenv.get("SPRING_DATASOURCE_USERNAME"));
+		System.setProperty("spring.datasource.password", dotenv.get("SPRING_DATASOURCE_PASSWORD"));
+		System.setProperty("security.jwt.secret", dotenv.get("JWT_SECRET_KEY"));
+		System.setProperty("security.jwt.refresh", dotenv.get("JWT_REFRESH_KEY"));
+		System.setProperty("spring.mail.username", dotenv.get("SUPPORT_EMAIL"));
+		System.setProperty("spring.mail.password", dotenv.get("APP_PASSWORD"));
 		
 		SpringApplication.run(AlzheimersApplication.class, args);
 	}

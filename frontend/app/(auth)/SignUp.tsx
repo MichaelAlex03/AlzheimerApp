@@ -1,159 +1,197 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { StyleSheet, Text, TouchableOpacity, View, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '@/components/CustomButton';
 import FormField from '@/components/FormField';
 import { router } from 'expo-router';
+import axios from '../../api/axios'
 
-const EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i
+const EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-const SignUp = () => {
+const SIGN_UP_URL = '/auth/signup'
 
+const SignUp = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-
   const [password, setPassword] = useState('');
   const [passFocus, setPassFocus] = useState(false);
   const [validPass, setValidPass] = useState(false);
-
   const [email, setEmail] = useState('');
   const [emailFocus, setEmailFocus] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
-
   const [isProfessional, setIsProfessional] = useState(false);
   const [isCaregiver, setIsCaregiver] = useState(false);
 
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
-  }, [email])
+  }, [email]);
 
   useEffect(() => {
-    setValidPass(PASSWORD_REGEX.test(password))
-  }, [password])
-
+    setValidPass(PASSWORD_REGEX.test(password));
+  }, [password]);
 
   const handleSubmit = () => {
+    let body = {
+      firstName,
+      lastName,
+      password,
+      email,
+    }
 
-  }
-
+    try {
+      
+    } catch (error) {
+      
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={[styles.textStyle, { fontSize: 48, marginBottom: 70 }]}>Sign Up</Text>
-
-      <Text style={[styles.textStyle, { fontSize: 34, marginBottom: 50 }]}>Role</Text>
-      <View style={styles.roleSelectorContainer}>
-        <TouchableOpacity
-          style={isProfessional ? [styles.buttonStyles, { width: 274, backgroundColor: '#6964A2' }] : [styles.buttonStyles, { width: 274 }]}
-          onPress={() => {
-            setIsProfessional(true);
-            setIsCaregiver(false);
-          }}
+      {/* KeyboardAvoidingView to handle keyboard interaction */}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.overlay}
+      >
+        <ScrollView
+          contentContainerStyle={{ alignItems: 'center', paddingBottom: 40 }}
+          keyboardShouldPersistTaps="handled"
         >
-          <Text style={isProfessional ? [styles.buttonText, { color: 'white' }] : styles.buttonText}>Professional</Text>
-        </TouchableOpacity>
+          <Text style={[styles.textStyle, { fontSize: 30 }]} >Sign Up</Text>
 
-        <TouchableOpacity
-          style={isCaregiver ? [styles.buttonStyles, { width: 274, backgroundColor: '#6964A2' }] : [styles.buttonStyles, { width: 274 }]}
-          onPress={() => {
-            setIsCaregiver(true);
-            setIsProfessional(false);
-          }}
-        >
-          <Text style={isCaregiver ? [styles.buttonText, { color: 'white' }] : styles.buttonText}>Caregiver</Text>
-        </TouchableOpacity>
-      </View>
+          <View style={styles.inputContainer}>
+            <Text style={[styles.textStyle, { fontSize: 24 }]}>Role</Text>
+            <View style={styles.roleSelectorContainer}>
+              <TouchableOpacity
+                style={
+                  isProfessional
+                    ? [styles.buttonStyles, { width: 160, backgroundColor: '#007AFF' }]
+                    : [styles.buttonStyles, { width: 160 }]
+                }
+                onPress={() => {
+                  setIsProfessional(true);
+                  setIsCaregiver(false);
+                }}
+              >
+                <Text style={isProfessional ? [styles.buttonText, { color: 'white' }] : styles.buttonText}>
+                  Professional
+                </Text>
+              </TouchableOpacity>
 
-      <View style={styles.whiteBar} />
+              <TouchableOpacity
+                style={
+                  isCaregiver
+                    ? [styles.buttonStyles, { width: 160, backgroundColor: '#007AFF' }]
+                    : [styles.buttonStyles, { width: 160 }]
+                }
+                onPress={() => {
+                  setIsCaregiver(true);
+                  setIsProfessional(false);
+                }}
+              >
+                <Text style={isCaregiver ? [styles.buttonText, { color: 'white' }] : styles.buttonText}>
+                  Caregiver
+                </Text>
+              </TouchableOpacity>
+            </View>
 
-      <View style={styles.textContainer}>
+            <View style={{ flexDirection: 'row', gap: 10 }}>
+              <FormField
+                title="First Name"
+                value={firstName}
+                handleChangeText={(e) => setFirstName(e)}
+                width={165}
+              />
+              <FormField
+                title="Last Name"
+                value={lastName}
+                handleChangeText={(e) => setLastName(e)}
+                width={165}
+              />
+            </View>
 
-        <View style={{ flexDirection: 'row', gap: 20 }}>
-          <FormField
-            title='First Name'
-            value={firstName}
-            handleChangeText={(e) => setFirstName(e)}
-            width={283}
+            <FormField
+              title="Email"
+              value={email}
+              handleChangeText={(e) => setEmail(e)}
+              handleFocus={() => setEmailFocus(true)}
+              handleBlur={() => setEmailFocus(false)}
+              width={340}
+            />
+
+            <FormField
+              title="Password"
+              value={password}
+              handleChangeText={(e) => setPassword(e)}
+              handleFocus={() => setPassFocus(true)}
+              handleBlur={() => setPassFocus(false)}
+              width={340}
+            />
+          </View>
+
+          <CustomButton title="Sign Up" width={340} onPress={handleSubmit} />
+          <CustomButton
+            title="Sign Up With Apple "
+            width={340}
+            onPress={handleSubmit}
+            containerStyle={{ backgroundColor: '#222222', marginTop: 10 }}
           />
-          <FormField
-            title='Last Name'
-            value={lastName}
-            handleChangeText={(e) => setLastName(e)}
-            width={283}
-          />
-        </View>
 
-        <FormField
-          title='Email'
-          value={email}
-          handleChangeText={(e) => setEmail(e)}
-          handleFocus={() => setEmailFocus(true)}
-          handleBlur={() => setEmailFocus(false)}
-          width={'100%'}
-        />
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 16 }}>
+            <Text style={[styles.textStyle, { fontSize: 16 }]}>Already have account?</Text>
+            <TouchableOpacity onPress={() => router.push('/Login')}>
+              <Text style={[styles.textStyle, { fontSize: 16, color: '#007AFF' }]}>Log In</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  );
+};
 
-        <FormField
-          title='Password'
-          value={password}
-          handleChangeText={(e) => setPassword(e)}
-          handleFocus={() => setPassFocus(true)}
-          handleBlur={() => setPassFocus(false)}
-          width={'100%'}
-        />
-
-      </View>
-
-      <CustomButton title={"Sign Up"} width={224} onPress={handleSubmit} />
-
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 40 }}>
-        <Text style={[styles.textStyle, [{ fontSize: 28 }]]}>Already have account?</Text>
-        <TouchableOpacity onPress={() => {
-          router.push('/Login')
-        }}>
-          <Text style={{ color: '#007AFF', fontSize: 28 }}>Log In</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView >
-  )
-}
-
-export default SignUp
+export default SignUp;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#2E2466',
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    backgroundColor: '#2E2466',
+  },
+  backgroundContainer: {
+    flex: 1,
+  },
+  overlay: {
+    flex: 1,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#FFFFFF',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingTop: 30,
+    paddingBottom: 20,
+  },
+  inputContainer: {
+    width: 340,
+    gap: 20,
+    marginBottom: 30,
   },
   textStyle: {
-    color: '#D9D9D9'
+    color: '#555',
   },
   buttonStyles: {
-    backgroundColor: '#D9D9D9',
+    backgroundColor: '#E6E1FA',
     borderRadius: 12,
-    paddingVertical: 15,
-    paddingHorizontal: 64,
-    alignItems: 'center'
+    paddingVertical: 10,
+    alignItems: 'center',
   },
   buttonText: {
-    fontSize: 24
+    fontSize: 18,
+    color: '#000000',
   },
   roleSelectorContainer: {
     flexDirection: 'row',
-    gap: 20
+    gap: 10,
   },
-  whiteBar: {
-    borderColor: '#D9D9D9',
-    borderWidth: 4,
-    width: 586,
-    marginTop: 60,
-    marginBottom: 60
-  },
-  textContainer: {
-    width: 586,
-    gap: 20,
-    marginBottom: 40
-  }
-})
+});

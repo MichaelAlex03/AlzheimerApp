@@ -33,8 +33,9 @@ export default function Index() {
 
         <CustomButton
           title={"How to Sign Up"}
-          width={300}
+          width={275}
           onPress={() => (router.push('/SignUpHelp'))}
+          containerStyle={{ backgroundColor: '#5c2aad' }}
         />
       </View>
     </SafeAreaView>
@@ -75,6 +76,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   buttonText: {
-    fontSize: 24
+    fontSize: 24,
   }
 })

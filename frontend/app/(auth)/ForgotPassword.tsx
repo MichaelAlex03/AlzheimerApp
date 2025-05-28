@@ -1,15 +1,28 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Alert } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
 import { router } from 'expo-router';
 
-const Login = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const resetPassword = () => {
+    Alert.alert(
+      'Password Reset',
+      'A reset link has been sent to your email. Please check your junk folder if you do not see the reset password email.',
+      [
+        {
+          text: 'Check email now',
+          onPress: () => {
+            router.push('/');
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   };
 
   return (
@@ -18,46 +31,23 @@ const Login = () => {
 
       <View style={styles.overlay}>
         <Text style={[styles.textStyle, { fontSize: 32, marginBottom: 50 }]}>
-          {"Welcome to NueroNest"}
+          Reset Your Password
         </Text>
 
         <View style={styles.inputContainer}>
           <FormField
-            title="Email or Phone Number"
+            title="Enter your email"
             value={email}
             handleChangeText={(e) => setEmail(e)}
             placeholder="hello@xyz.com"
           />
-          <FormField
-            title="Password"
-            value={password}
-            handleChangeText={(e) => setPassword(e)}
-            placeholder="••••••••"
-            secureTextEntry
-          />
-
-          <TouchableOpacity onPress={() => router.push('/ForgotPassword')}>
-            <Text
-              style={[
-                styles.textStyle,
-                { fontSize: 16, marginLeft: 'auto', marginBottom: 164, color: '#007AFF' },
-              ]}
-            >
-              Forgot Password?
-            </Text>
-          </TouchableOpacity>
         </View>
 
         <CustomButton
-            title="Sign In"
-            width={340}
-            onPress={() => {
-                handleLogin();
-                router.push('/Landing');
-            }}
+          title="Reset Password"
+          width={340}
+          onPress={resetPassword}
         />
-
-
 
         <View style={{ flexDirection: 'row', gap: 10 }}>
           <Text style={[styles.textStyle, { fontSize: 16, marginTop: 16 }]}>
@@ -65,7 +55,7 @@ const Login = () => {
           </Text>
           <TouchableOpacity onPress={() => router.push('/SignUp')}>
             <Text
-              style={[styles.textStyle, { fontSize: 16, color: '#007AFF', marginTop: 16  }]}
+              style={[styles.textStyle, { fontSize: 16, color: '#007AFF', marginTop: 16 }]}
             >
               Sign up
             </Text>
@@ -76,7 +66,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;
 
 const styles = StyleSheet.create({
   container: {
@@ -103,7 +93,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     width: 340,
     gap: 20,
-    marginBottom: 30,
+    marginBottom: 340,
   },
   textStyle: {
     color: '#222222', 

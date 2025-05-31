@@ -53,6 +53,8 @@ public class User implements UserDetails {
     @Column(name = "user_type")
     private String userType;
 
+    @Getter
+    @Setter
     @Column(name = "refresh_token")
     private String refreshToken;
 

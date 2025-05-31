@@ -43,6 +43,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
+
+        String path = request.getServletPath();
+        System.out.println("Requested path: " + path);
+
+        if(path.startsWith("/auth/")){
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         final String authHeader = request.getHeader("Authorization");
 
         //If not authorization header or token doesn't start with "Bearer" pass it to next filter

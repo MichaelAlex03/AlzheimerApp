@@ -25,25 +25,39 @@ public class AuthenticationService {
 
     private final EmailService emailService;
 
+    private final JwtService jwtService;
+
     public AuthenticationService(
             UserRepository userRepository,
             PasswordEncoder passwordEncoder,
             AuthenticationManager authenticationManager,
-            EmailService emailService
+            EmailService emailService,
+            JwtService jwtService
     ){
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.emailService = emailService;
+        this.jwtService = jwtService;
+    }
+
+    public Boolean doesUserExist(String email){
+        Optional<User> user = userRepository.findByEmail(email);
+        return user.isPresent();
     }
 
     public User signUp(RegisterUserDto input){
-        User user = new User(input.getFirstName(), input.getLastName(), input.getEmail(), input.getPassword(), input.getUserType());
-        user.setVerificationCode(generateVerificationCode());
-        user.setVerificationCodeExpiresAt(LocalDateTime.now().plusMinutes(15));
-        sendVerificationEmail(user);
 
-        return userRepository.save(user);
+        if(!doesUserExist(input.getEmail())){
+            User user = new User(input.getFirstName(), input.getLastName(), input.getEmail(), input.getPassword(), input.getUserType());
+            user.setVerificationCode(generateVerificationCode());
+            user.setVerificationCodeExpiresAt(LocalDateTime.now().plusMinutes(15));
+            sendVerificationEmail(user);
+
+            return userRepository.save(user);
+        }
+
+        throw new RuntimeException("User already exists");
     }
 
     public User authenticate(LoginUserDto input){
@@ -53,6 +67,8 @@ public class AuthenticationService {
         if(!user.isEnabled()){
             throw new RuntimeException("Account not verified. Please verify your account");
         }
+
+        user.setRefreshToken(jwtService.generateRefreshToken(user));
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -103,18 +119,7 @@ public class AuthenticationService {
     public void sendVerificationEmail(User user){
         String subject = "Account Verification";
         Integer verificationCode = user.getVerificationCode();
-        String htmlMessage = "<html>"
-                + "<body style=\"font-family: Arial, sans-serif;\">"
-                + "<div style=\"background-color: #f5f5f5; padding: 20px;\">"
-                + "<h2 style=\"color: #333;\">Welcome to our app!</h2>"
-                + "<p style=\"font-size: 16px;\">Please enter the verification code below to continue:</p>"
-                + "<div style=\"background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);\">"
-                + "<h3 style=\"color: #333;\">Verification Code:</h3>"
-                + "<p style=\"font-size: 18px; font-weight: bold; color: #007bff;\">" + verificationCode + "</p>"
-                + "</div>"
-                + "</div>"
-                + "</body>"
-                + "</html>";
+        String htmlMessage = String.valueOf(verificationCode);
         try{
             emailService.sendVerificationEmail(user.getEmail(), subject, htmlMessage);
         }catch (MessagingException e){

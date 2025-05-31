@@ -5,13 +5,16 @@ import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
 import { useLocalSearchParams } from 'expo-router';
 import axios from '@/api/axios';
+import { router } from "expo-router"
 
 const RESEND_URL = '/auth/resend';
+const VERIFY_URL = '/auth/verify'
 
 const ConfirmSignUp = () => {
 
-  const { email } = useLocalSearchParams();
-  const [code, setCode] = useState('');
+  const { email, userType } = useLocalSearchParams();
+  const [verificationCode, setVerificationCode] = useState('');
+  const [errMsg, setErrMsg] = useState('');
 
   const handleResendEmail = async () => {
     try {
@@ -20,6 +23,25 @@ const ConfirmSignUp = () => {
           email: email
         }
       })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleVerifyCode = async () => {
+    try {
+      await axios.post(VERIFY_URL, {
+        email,
+        verificationCode: parseInt(verificationCode, 10)
+      })
+
+      
+      if (userType === "professional") {
+        router.push("/ProfessionalVerification");
+      } else {
+        router.push("/Login");
+      }
+
     } catch (error) {
       console.log(error)
     }
@@ -34,13 +56,19 @@ const ConfirmSignUp = () => {
       <View style={styles.content}>
         <Text style={[styles.textStyle, { fontSize: 24 }]}>You will recieve a 6 digit code in your email</Text>
         <FormField
-          value={code}
-          handleChangeText={(e) => setCode(e)}
-          placeholder='EX. 123456'
+          value={verificationCode}
+          handleChangeText={(e) => setVerificationCode(e)}
+          placeholder='Ex. 123456'
+        />
+        <CustomButton
+          title='Submit Code'
+          width={310}
+          onPress={handleVerifyCode}
+          containerStyle={{ marginTop: 30 }}
         />
         <CustomButton
           title='Send Code Again'
-          width={338}
+          width={310}
           onPress={handleResendEmail}
           containerStyle={{ marginTop: 30 }}
         />

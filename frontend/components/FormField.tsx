@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, DimensionValue } from 'react-native'
+import { StyleSheet, Text, View, TextInput, DimensionValue, StyleProp, TextStyle } from 'react-native'
 import React from 'react'
 
 interface FormProps {
@@ -10,12 +10,13 @@ interface FormProps {
     handleBlur?: () => void
     width?: DimensionValue
     secureTextEntry?: boolean;
+    customTextStyles?: StyleProp<TextStyle>;
 }
 
-const FormField = ({ title, value, placeholder, handleChangeText, handleFocus, handleBlur, width }: FormProps) => {
+const FormField = ({ title, value, placeholder, handleChangeText, handleFocus, handleBlur, width, customTextStyles }: FormProps) => {
     return (
         <View style={[styles.formContainer, { width: width ?? '100%' }]}>
-            <Text style={styles.formText}>{title}</Text>
+            <Text style={[styles.formText, customTextStyles]}>{title}</Text>
             <TextInput
                 value={value}
                 placeholder={placeholder}

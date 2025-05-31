@@ -4,7 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '@/components/CustomButton';
 import FormField from '@/components/FormField';
 import { router } from 'expo-router';
-import axios from '../../api/axios'
+import ax from '../../api/axios';
+import axios, { AxiosError} from 'axios';
 
 const EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -33,10 +34,14 @@ const SignUp = () => {
 
   const handleSubmit = async () => {
 
+    if (!firstName || !lastName || !password || !email || (!isProfessional && !isCaregiver)){
+      Alert.alert("Missing fields", "One or more fields required are missing. Please fill in and select all fields");
+    }
+
     const userType = isCaregiver ? "Caregiver" : "Professional";
 
     try {
-      const response = await axios.post(SIGN_UP_URL, {
+      const response = await ax.post(SIGN_UP_URL, {
         firstName,
         lastName,
         password,
@@ -46,7 +51,7 @@ const SignUp = () => {
 
       console.log("RESPONSEEE" , response)
 
-      router.push({ pathname: "/ConfirmSignUp", params: { email } });
+      router.push({ pathname: "/ConfirmSignUp", params: { email, userType } });
 
       setFirstName('');
       setLastName('');
@@ -55,9 +60,13 @@ const SignUp = () => {
       setIsCaregiver(false);
       setIsProfessional(false);
 
-    } catch (error) {
-      console.log("Error", error)
-      Alert.alert("Error", "Something went wrong with the sign up")
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        console.log('Status:', error.response?.status);
+        console.log('Message:', error.response?.data?.message); // if backend sends JSON
+      } else {
+        console.log('Unexpected error:', error);
+      }
     }
   };
 

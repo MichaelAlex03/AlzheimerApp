@@ -3,13 +3,26 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useState } from 'react'
 import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
+import { useLocalSearchParams } from 'expo-router';
+import axios from '@/api/axios';
+
+const RESEND_URL = '/auth/resend';
 
 const ConfirmSignUp = () => {
 
+  const { email } = useLocalSearchParams();
   const [code, setCode] = useState('');
 
   const handleResendEmail = async () => {
-
+    try {
+      await axios.post(RESEND_URL, {
+        params: {
+          email: email
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -29,7 +42,7 @@ const ConfirmSignUp = () => {
           title='Send Code Again'
           width={338}
           onPress={handleResendEmail}
-          containerStyle={{marginTop: 30}}
+          containerStyle={{ marginTop: 30 }}
         />
       </View>
     </SafeAreaView>

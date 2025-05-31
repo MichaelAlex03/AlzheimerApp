@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, KeyboardAvoidingView, Platform, ScrollView, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '@/components/CustomButton';
@@ -33,24 +33,31 @@ const SignUp = () => {
 
   const handleSubmit = async () => {
 
-    const userType = isCaregiver ? "Caregiver": "Professional";
-
-    let body = {
-      firstName,
-      lastName,
-      password,
-      email,
-      userType
-    }
+    const userType = isCaregiver ? "Caregiver" : "Professional";
 
     try {
-        // await axios.post(SIGN_UP_URL, {
-        //   body
-        // })
+      const response = await axios.post(SIGN_UP_URL, {
+        firstName,
+        lastName,
+        password,
+        email,
+        userType
+      })
 
-        router.push("/ConfirmSignUp")
+      console.log("RESPONSEEE" , response)
+
+      router.push({ pathname: "/ConfirmSignUp", params: { email } });
+
+      setFirstName('');
+      setLastName('');
+      setPassword('')
+      setEmail('');
+      setIsCaregiver(false);
+      setIsProfessional(false);
+
     } catch (error) {
-      
+      console.log("Error", error)
+      Alert.alert("Error", "Something went wrong with the sign up")
     }
   };
 
@@ -147,7 +154,7 @@ const SignUp = () => {
 
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 16 }}>
             <Text style={[styles.textStyle, { fontSize: 16 }]}>Already have account?</Text>
-            <TouchableOpacity onPress={() => router.push('/Login')}>
+            <TouchableOpacity onPress={() => router.push('/ProfessionalVerification')}>
               <Text style={[styles.textStyle, { fontSize: 16, color: '#007AFF' }]}>Log In</Text>
             </TouchableOpacity>
           </View>

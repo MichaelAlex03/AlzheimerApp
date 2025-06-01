@@ -10,4 +10,5 @@ public class RegisterProfressionalDto {
     private String zipcode;
     private String city;
     private String state;
+    private long userId;
 }

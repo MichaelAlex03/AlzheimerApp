@@ -30,7 +30,7 @@ public class AuthenticationController {
 
     @PostMapping("/signup")
     public ResponseEntity<ApiResponseDto> register(@RequestBody RegisterUserDto registerUserDto){
-        User registeredUser = authenticationService.signUp(registerUserDto);
+        authenticationService.signUp(registerUserDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new ApiResponseDto("User created successfully"));

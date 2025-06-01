@@ -29,21 +29,25 @@ public class Professional  {
     @Column
     private String state;
 
+    @Column(name = "user_id")
+    private long userId;
+
 
     public Professional(
             String organizationName,
             String address,
             String zipcode,
             String city,
-            String state
+            String state,
+            long userId
     ){
         this.organizationName = organizationName;
         this.address = address;
         this.zipcode = zipcode;
         this.city = city;
         this.state = state;
+        this.userId = userId;
     }
 
-    @Column(name = "user_id")
-    private long userId;
+
 }

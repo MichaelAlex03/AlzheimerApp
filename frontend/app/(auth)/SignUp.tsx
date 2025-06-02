@@ -175,7 +175,7 @@ const SignUp = () => {
 
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 16 }}>
             <Text style={[styles.textStyle, { fontSize: 16 }]}>Already have account?</Text>
-            <TouchableOpacity onPress={() => router.push('/ProfessionalVerification')}>
+            <TouchableOpacity onPress={() => router.push('/Login')}>
               <Text style={[styles.textStyle, { fontSize: 16, color: '#007AFF' }]}>Log In</Text>
             </TouchableOpacity>
           </View>

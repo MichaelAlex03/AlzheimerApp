@@ -70,8 +70,8 @@ const ConfirmSignUp = () => {
             <CustomButton
               title='Submit Code'
               width={310}
-              onPress={handleVerifyCode}
-              containerStyle={{ marginTop: 30, }}
+              onPress={() => router.push('/ProfessionalVerification')}
+              containerStyle={{ marginTop: 30 }}
             />
             <CustomButton
               title='Send Code Again'

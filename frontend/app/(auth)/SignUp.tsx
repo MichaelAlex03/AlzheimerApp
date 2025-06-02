@@ -5,7 +5,7 @@ import CustomButton from '@/components/CustomButton';
 import FormField from '@/components/FormField';
 import { router } from 'expo-router';
 import ax from '../../api/axios';
-import axios, { AxiosError} from 'axios';
+import axios from 'axios';
 
 const EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -33,46 +33,58 @@ const SignUp = () => {
   }, [password]);
 
   const handleSubmit = async () => {
+  if (!firstName || !lastName || !password || !email || (!isProfessional && !isCaregiver)){
+    Alert.alert("Missing fields", "One or more fields required are missing. Please fill in and select all fields");
+    return;
+  }
 
-    if (!firstName || !lastName || !password || !email || (!isProfessional && !isCaregiver)){
-      Alert.alert("Missing fields", "One or more fields required are missing. Please fill in and select all fields");
-    }
+  const userType = isCaregiver ? "Caregiver" : "Professional";
 
-    const userType = isCaregiver ? "Caregiver" : "Professional";
+  // commentng out the API call for now, causing errors w/o backend
+  // try {
+  //   const response = await ax.post(SIGN_UP_URL, {
+  //     firstName,
+  //     lastName,
+  //     password,
+  //     email,
+  //     userType
+  //   });
 
-    try {
-      const response = await ax.post(SIGN_UP_URL, {
-        firstName,
-        lastName,
-        password,
-        email,
-        userType
-      })
+  //   if (response?.data?.success || response?.status === 200 || response?.status === 201) {
+  //     router.push({ pathname: "/ConfirmSignUp", params: { email, userType } });
 
-      console.log("RESPONSEEE" , response)
+  //     setFirstName('');
+  //     setLastName('');
+  //     setPassword('');
+  //     setEmail('');
+  //     setIsCaregiver(false);
+  //     setIsProfessional(false);
+  //   } else {
+  //     Alert.alert('Sign Up Failed #1', response?.data?.message || 'Unknown error occurred.');
+  //   }
+  // } catch (error) {
+  //   if (axios.isAxiosError(error)) {
+  //     Alert.alert('Sign Up Failed #2', error.response?.data?.message || 'An error occurred.');
+  //     console.log('Status:', error.response?.status);
+  //     console.log('Message:', error.response?.data?.message);
+  //   } else {
+  //     Alert.alert('Sign Up Failed #3', 'Unexpected error occurred.');
+  //     console.log('Unexpected error:', error);
+  //   }
+  // }
 
-      router.push({ pathname: "/ConfirmSignUp", params: { email, userType } });
+  router.push({ pathname: "/ConfirmSignUp", params: { email, userType } });
 
-      setFirstName('');
-      setLastName('');
-      setPassword('')
-      setEmail('');
-      setIsCaregiver(false);
-      setIsProfessional(false);
-
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.log('Status:', error.response?.status);
-        console.log('Message:', error.response?.data?.message); // if backend sends JSON
-      } else {
-        console.log('Unexpected error:', error);
-      }
-    }
-  };
+  setFirstName('');
+  setLastName('');
+  setPassword('');
+  setEmail('');
+  setIsCaregiver(false);
+  setIsProfessional(false);
+};
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* KeyboardAvoidingView to handle keyboard interaction */}
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.overlay}
@@ -163,7 +175,7 @@ const SignUp = () => {
 
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 16 }}>
             <Text style={[styles.textStyle, { fontSize: 16 }]}>Already have account?</Text>
-            <TouchableOpacity onPress={() => router.push('/ProfessionalVerification')}>
+            <TouchableOpacity onPress={() => router.push('/Login')}>
               <Text style={[styles.textStyle, { fontSize: 16, color: '#007AFF' }]}>Log In</Text>
             </TouchableOpacity>
           </View>

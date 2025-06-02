@@ -1,3 +1,4 @@
+import { axiosPrivate } from '@/api/axios'
 import CustomButton from '@/components/CustomButton'
 import FormField from '@/components/FormField'
 import { router } from 'expo-router'
@@ -5,9 +6,9 @@ import React, { useState } from 'react'
 import { FlatList, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import parseErrorStack from 'react-native/Libraries/Core/Devtools/parseErrorStack'
 
-const CREATE_PROFESSIONAL_URL = '';
+
+const CREATE_PROFESSIONAL_URL = '/professional/';
 
 const ProfessionalVerification = () => {
 
@@ -30,7 +31,7 @@ const ProfessionalVerification = () => {
     try {
       
     } catch (error) {
-      console.log(parseErrorStack)
+      console.log(error)
     }
   }
 

@@ -134,6 +134,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     marginRight: 8,
+    marginTop: 16,
     paddingVertical: 6,
     paddingHorizontal: 14,
     backgroundColor: COLORS.white,
@@ -143,13 +144,13 @@ const styles = StyleSheet.create({
     shadowColor: COLORS.shadow,
     shadowOpacity: 0.18,
     shadowRadius: 4,
-    elevation: 2,
   },
   profileContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginLeft: 'auto',
     marginRight: 12,
+    marginTop: 16,
   },
   profileIcon: {
     width: 36,
@@ -163,6 +164,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color: COLORS.accentLight,
     padding: 4,
+    marginTop: 16,
   },
   sectionTitle: {
     color: COLORS.textPrimary,
@@ -242,7 +244,6 @@ const styles = StyleSheet.create({
     shadowColor: COLORS.shadow,
     shadowOpacity: 0.12,
     shadowRadius: 6,
-    elevation: 2,
   },
   taskImage: {
     width: 80,
@@ -263,8 +264,8 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   placeholderImage: {
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 100,
     backgroundColor: COLORS.placeholder,
     borderRadius: 10,
     marginBottom: 8,

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useState } from 'react'
 import FormField from '@/components/FormField';
@@ -35,7 +35,6 @@ const ConfirmSignUp = () => {
         verificationCode: parseInt(verificationCode, 10)
       })
 
-      
       if (userType === "professional") {
         router.push("/ProfessionalVerification");
       } else {
@@ -49,30 +48,40 @@ const ConfirmSignUp = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <Text style={[styles.textStyle, { fontSize: 48 }]}>Confirm Email</Text>
-      </View>
-
-      <View style={styles.content}>
-        <Text style={[styles.textStyle, { fontSize: 24 }]}>You will recieve a 6 digit code in your email</Text>
-        <FormField
-          value={verificationCode}
-          handleChangeText={(e) => setVerificationCode(e)}
-          placeholder='Ex. 123456'
-        />
-        <CustomButton
-          title='Submit Code'
-          width={310}
-          onPress={handleVerifyCode}
-          containerStyle={{ marginTop: 30 }}
-        />
-        <CustomButton
-          title='Send Code Again'
-          width={310}
-          onPress={handleResendEmail}
-          containerStyle={{ marginTop: 30 }}
-        />
-      </View>
+      <KeyboardAvoidingView
+        style={{ flex: 1, width: '100%' }}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      >
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+        >
+          <Text style={[styles.textStyle, styles.title]}>Confirm Email</Text>
+          <View style={styles.content}>
+            <Text style={[styles.textStyle, styles.subtitle]}>
+              You will receive a 6 digit code in your email
+            </Text>
+            <FormField
+              value={verificationCode}
+              handleChangeText={(e) => setVerificationCode(e)}
+              placeholder='Ex. 123456'
+              width={310}
+            />
+            <CustomButton
+              title='Submit Code'
+              width={310}
+              onPress={handleVerifyCode}
+              containerStyle={{ marginTop: 30, }}
+            />
+            <CustomButton
+              title='Send Code Again'
+              width={310}
+              onPress={handleResendEmail}
+              containerStyle={{ marginTop: 20 }}
+            />
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }
@@ -83,17 +92,31 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#2E2466',
     flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingBottom: 40,
+  },
+  title: {
+    fontSize: 36,
+    fontWeight: '800',
+    marginBottom: 24,
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 18,
+    marginBottom: 24,
+    textAlign: 'center',
   },
   content: {
-    width: 455,
-    height: 84,
+    width: '100%',
     alignItems: 'center',
-    marginTop: 70,
-
+    marginTop: 0,
   },
   textStyle: {
-    color: '#D9D9D9'
-  }
-})
+    color: '#D9D9D9',
+  },
+});

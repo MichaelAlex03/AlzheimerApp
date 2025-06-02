@@ -15,25 +15,24 @@ export default function Index() {
       <Text style={styles.textStyles}>NeuroNest</Text>
 
       <View style={styles.welcomeViewContainer}>
-        <Text style={[styles.textStyles, { fontSize: 36 }]}>Welcome</Text>
-
         <View style={styles.buttonContainer}>
           <CustomButton
             title={"Login"}
-            width={224}
+            width={270}
             onPress={() => (router.push('/Login'))}
           />
           <CustomButton
             title={"Sign Up"}
-            width={224}
+            width={270}
             onPress={() => (router.push('/SignUp'))}
+            containerStyle={{ marginBottom: 60 }}
           />
         </View>
 
 
         <CustomButton
-          title={"How to Sign Up"}
-          width={275}
+          title={"Help"}
+          width={270}
           onPress={() => (router.push('/SignUpHelp'))}
           containerStyle={{ backgroundColor: '#5c2aad' }}
         />
@@ -62,7 +61,8 @@ const styles = StyleSheet.create({
   },
   textStyles: {
     color: '#D9D9D9',
-    fontSize: 48
+    fontSize: 48,
+    marginBottom: 50,
   },
   buttonContainer: {
     alignItems: 'center',

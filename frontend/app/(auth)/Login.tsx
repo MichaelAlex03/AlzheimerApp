@@ -18,7 +18,7 @@ const Login = () => {
 
       <View style={styles.overlay}>
         <Text style={[styles.textStyle, { fontSize: 32, marginBottom: 50 }]}>
-          {"Welcome to NueroNest"}
+          {"Welcome Back!"}
         </Text>
 
         <View style={styles.inputContainer}>

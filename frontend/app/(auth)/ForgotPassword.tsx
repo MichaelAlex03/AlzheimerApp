@@ -15,7 +15,7 @@ const ForgotPassword = () => {
       'A reset link has been sent to your email. Please check your junk folder if you do not see the reset password email.',
       [
         {
-          text: 'Check email now',
+          text: 'OK',
           onPress: () => {
             router.push('/');
           },

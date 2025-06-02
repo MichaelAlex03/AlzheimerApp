@@ -14,7 +14,7 @@ public class ProfessionalService {
         this.professionalRepository = professionalRepository;
     }
 
-    public Professional create(RegisterProfressionalDto input){
+    public void create(RegisterProfressionalDto input){
         Professional professional = new Professional(
                 input.getOrganizationName(),
                 input.getAddress(),
@@ -24,6 +24,6 @@ public class ProfessionalService {
                 input.getUserId()
         );
 
-        return professionalRepository.save(professional);
+        professionalRepository.save(professional);
     }
 }

@@ -16,6 +16,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
     private long id;
 
     @Getter
@@ -57,6 +58,10 @@ public class User implements UserDetails {
     @Setter
     @Column(name = "refresh_token")
     private String refreshToken;
+
+    public User(){
+
+    }
 
     public User(String firstName, String lastName, String email, String password, String userType){
         this.firstName = firstName;

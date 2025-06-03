@@ -40,19 +40,22 @@ public class AuthenticationController {
     public ResponseEntity<LoginResponse> login(@RequestBody LoginUserDto loginUserDto){
         User authenticatedUser = authenticationService.authenticate(loginUserDto);
         String jwtToken = jwtService.generateToken(authenticatedUser);
+        String refreshToken = jwtService.generateRefreshToken(authenticatedUser);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(new LoginResponse(jwtToken));
+                .body(new LoginResponse(jwtToken, refreshToken, authenticatedUser.getId()));
     }
 
     @PostMapping("/verify")
     public ResponseEntity<?> verifyUser(@RequestBody VerifyUserDto verifyUserDto){
+        System.out.println("HELLO" + verifyUserDto.getEmail() + verifyUserDto.getVerificationCode());
         try{
             authenticationService.verifyUser(verifyUserDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(new ApiResponseDto("Account verified successfully"));
         } catch (RuntimeException e){
+            System.out.println("HELLO" + verifyUserDto);
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

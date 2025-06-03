@@ -4,12 +4,28 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
 import { router } from 'expo-router';
+import { axiosPrivate } from '@/api/axios';
+import useAxiosPrivate from '@/hooks/useAxiosPrivate';
+
+const LOGIN_URL = '/auth/login';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const axiosPrivate = useAxiosPrivate();
+
+  const handleLogin = async () => {
+    try {
+      const response = await axiosPrivate.post(LOGIN_URL, {
+        email,
+        password
+      });
+
+      console.log("response", response)
+    } catch (error) {
+      
+    }
   };
 
   return (

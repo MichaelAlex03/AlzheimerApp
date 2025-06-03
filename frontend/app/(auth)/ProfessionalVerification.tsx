@@ -1,13 +1,15 @@
 import { axiosPrivate } from '@/api/axios'
 import CustomButton from '@/components/CustomButton'
 import FormField from '@/components/FormField'
+import useAuth from '@/hooks/useAuth'
+import useAxiosPrivate from '@/hooks/useAxiosPrivate'
 import { router } from 'expo-router'
 import React, { useState } from 'react'
 import { FlatList, Modal, StyleSheet, Text, TouchableOpacity, View, KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-const CREATE_PROFESSIONAL_URL = '/professional/';
+const PROFESSIONAL_URL = '/api/professional';
 
 const states = ["AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TT", "TX", "UT", "VI", "VT", "VA", "WA", "WI", "WV", "WY"];
 
@@ -20,13 +22,24 @@ const ProfessionalVerification = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [errMsg, setErrMsg] = useState('');
 
+  const axiosPrivate = useAxiosPrivate()
+  const { auth } = useAuth();
+
   const handleSubmit = async () => {
-    if (!orgName || !address || !zipcode || !city || !state ){
+    if (!orgName || !address || !zipcode || !city || !state) {
       setErrMsg('One or more fields are empty. Please fill in all fields');
       return
     }
     try {
       // api call
+      await axiosPrivate.post(PROFESSIONAL_URL, {
+        organizationName: orgName,
+        address,
+        zipcode,
+        city,
+        state,
+        userId: auth?.userId
+      })
     } catch (error) {
       console.log(error)
     }

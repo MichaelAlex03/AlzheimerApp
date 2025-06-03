@@ -29,13 +29,16 @@ const ConfirmSignUp = () => {
   }
 
   const handleVerifyCode = async () => {
+
     try {
-      await axios.post(VERIFY_URL, {
+      const response = await axios.post(VERIFY_URL, {
         email,
         verificationCode: parseInt(verificationCode, 10)
       })
 
-      if (userType === "professional") {
+      console.log("res", response)
+
+      if (userType === "Professional") {
         router.push("/ProfessionalVerification");
       } else {
         router.push("/Login");
@@ -70,7 +73,10 @@ const ConfirmSignUp = () => {
             <CustomButton
               title='Submit Code'
               width={310}
-              onPress={() => router.push('/ProfessionalVerification')}
+              onPress={() => {
+                handleVerifyCode();
+      
+              }}
               containerStyle={{ marginTop: 30 }}
             />
             <CustomButton

@@ -41,46 +41,38 @@ const SignUp = () => {
   const userType = isCaregiver ? "Caregiver" : "Professional";
 
   // commentng out the API call for now, causing errors w/o backend
-  // try {
-  //   const response = await ax.post(SIGN_UP_URL, {
-  //     firstName,
-  //     lastName,
-  //     password,
-  //     email,
-  //     userType
-  //   });
+  try {
+    const response = await ax.post(SIGN_UP_URL, {
+      firstName,
+      lastName,
+      password,
+      email,
+      userType
+    });
 
-  //   if (response?.data?.success || response?.status === 200 || response?.status === 201) {
-  //     router.push({ pathname: "/ConfirmSignUp", params: { email, userType } });
+    if (response?.data?.success || response?.status === 200 || response?.status === 201) {
+      router.push({ pathname: "/ConfirmSignUp", params: { email, userType } });
 
-  //     setFirstName('');
-  //     setLastName('');
-  //     setPassword('');
-  //     setEmail('');
-  //     setIsCaregiver(false);
-  //     setIsProfessional(false);
-  //   } else {
-  //     Alert.alert('Sign Up Failed #1', response?.data?.message || 'Unknown error occurred.');
-  //   }
-  // } catch (error) {
-  //   if (axios.isAxiosError(error)) {
-  //     Alert.alert('Sign Up Failed #2', error.response?.data?.message || 'An error occurred.');
-  //     console.log('Status:', error.response?.status);
-  //     console.log('Message:', error.response?.data?.message);
-  //   } else {
-  //     Alert.alert('Sign Up Failed #3', 'Unexpected error occurred.');
-  //     console.log('Unexpected error:', error);
-  //   }
-  // }
+      setFirstName('');
+      setLastName('');
+      setPassword('');
+      setEmail('');
+      setIsCaregiver(false);
+      setIsProfessional(false);
+    } else {
+      Alert.alert('Sign Up Failed #1', response?.data?.message || 'Unknown error occurred.');
+    }
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      Alert.alert('Sign Up Failed #2', error.response?.data?.message || 'An error occurred.');
+      console.log('Status:', error.response?.status);
+      console.log('Message:', error.response?.data?.message);
+    } else {
+      Alert.alert('Sign Up Failed #3', 'Unexpected error occurred.');
+      console.log('Unexpected error:', error);
+    }
+  }
 
-  router.push({ pathname: "/ConfirmSignUp", params: { email, userType } });
-
-  setFirstName('');
-  setLastName('');
-  setPassword('');
-  setEmail('');
-  setIsCaregiver(false);
-  setIsProfessional(false);
 };
 
   return (

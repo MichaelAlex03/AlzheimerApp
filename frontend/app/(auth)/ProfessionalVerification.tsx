@@ -26,11 +26,15 @@ const ProfessionalVerification = () => {
   const { auth } = useAuth();
 
   const handleSubmit = async () => {
+    console.log("helloooo")
     if (!orgName || !address || !zipcode || !city || !state) {
       setErrMsg('One or more fields are empty. Please fill in all fields');
-      return
+      return;
     }
+    console.log("herrrrrr")
     try {
+
+      console.log("trying")
       // api call
       await axiosPrivate.post(PROFESSIONAL_URL, {
         organizationName: orgName,
@@ -40,6 +44,8 @@ const ProfessionalVerification = () => {
         state,
         userId: auth?.userId
       })
+
+      router.push("/VerificationInProgress")
     } catch (error) {
       console.log(error)
     }
@@ -145,10 +151,6 @@ const ProfessionalVerification = () => {
               </View>
             </View>
 
-            {errMsg ? (
-              <Text style={styles.errorMsg}>{errMsg}</Text>
-            ) : null}
-
             <View style={styles.buttonGroup}>
               <CustomButton
                 title='ID Picture'
@@ -163,7 +165,7 @@ const ProfessionalVerification = () => {
 
               <CustomButton
                 title='Continue'
-                onPress={() => { router.push("/VerificationInProgress") }}
+                onPress={handleSubmit}
                 width={250}
                 containerStyle={{ marginTop: 10 }}
               />

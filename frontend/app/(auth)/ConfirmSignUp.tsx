@@ -36,10 +36,11 @@ const ConfirmSignUp = () => {
         verificationCode: parseInt(verificationCode, 10)
       })
 
-      console.log("res", response)
+      console.log("res", response.data.userId);
+      console.log("TEsttt")
 
       if (userType === "Professional") {
-        router.push("/ProfessionalVerification");
+        router.push({pathname: "/ProfessionalVerification", params: {}});
       } else {
         router.push("/Login");
       }

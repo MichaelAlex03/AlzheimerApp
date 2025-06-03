@@ -6,6 +6,7 @@ import com.spring.alzheimers.dto.RegisterUserDto;
 import com.spring.alzheimers.dto.VerifyUserDto;
 import com.spring.alzheimers.model.User;
 import com.spring.alzheimers.responses.LoginResponse;
+import com.spring.alzheimers.responses.VerifyResponse;
 import com.spring.alzheimers.service.AuthenticationService;
 import com.spring.alzheimers.service.JwtService;
 import org.springframework.http.HttpStatus;
@@ -48,14 +49,12 @@ public class AuthenticationController {
 
     @PostMapping("/verify")
     public ResponseEntity<?> verifyUser(@RequestBody VerifyUserDto verifyUserDto){
-        System.out.println("HELLO" + verifyUserDto.getEmail() + verifyUserDto.getVerificationCode());
         try{
-            authenticationService.verifyUser(verifyUserDto);
+            User user = authenticationService.verifyUser(verifyUserDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new ApiResponseDto("Account verified successfully"));
+                    .body(new VerifyResponse(user.getId(), "User has been verified"));
         } catch (RuntimeException e){
-            System.out.println("HELLO" + verifyUserDto);
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

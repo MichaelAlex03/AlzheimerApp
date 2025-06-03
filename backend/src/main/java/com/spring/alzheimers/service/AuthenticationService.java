@@ -80,7 +80,7 @@ public class AuthenticationService {
         return user;
     }
 
-    public void verifyUser(VerifyUserDto input){
+    public User verifyUser(VerifyUserDto input){
         System.out.println("HERE" + input.getEmail());
         Optional<User> optionalUser = userRepository.findByEmail(input.getEmail());
         if(optionalUser.isPresent()){
@@ -92,7 +92,7 @@ public class AuthenticationService {
                 user.setEnabled(true);
                 user.setVerificationCode(null);
                 user.setVerificationCodeExpiresAt(null);
-                userRepository.save(user);
+                return userRepository.save(user);
             } else {
                 throw new RuntimeException("Invalid verification code");
             }

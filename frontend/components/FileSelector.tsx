@@ -4,10 +4,27 @@ import { Image } from 'react-native'
 
 interface ImageSelectorProps {
     toggleAddOptions: boolean,
-    setToggleAddOptions: (val: boolean) => void
+    setToggleAddOptions: (val: boolean) => void,
+    toggleSelectPhotos: boolean,
+    setToggleSelectPhotos: (val: boolean) => void,
+    toggleCamera: boolean,
+    setToggleCamera: (val: boolean) => void,
+    toggleVideo: boolean,
+    setToggleVideo: (val: boolean) => void
 }
 
-const ImageSelector = ({ toggleAddOptions, setToggleAddOptions }: ImageSelectorProps) => {
+const ImageSelector = (
+    {
+        toggleAddOptions,
+        setToggleAddOptions,
+        toggleSelectPhotos,
+        setToggleSelectPhotos,
+        toggleCamera,
+        setToggleCamera,
+        toggleVideo,
+        setToggleVideo
+    }: ImageSelectorProps
+) => {
     return (
         <Modal
             visible={toggleAddOptions}
@@ -110,9 +127,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 32
-    }, 
+    },
     buttonText: {
-       fontSize: 28,
-       color: '#010101'
+        fontSize: 28,
+        color: '#010101'
     }
 })

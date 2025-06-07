@@ -10,7 +10,7 @@ import FileSelector from '@/components/FileSelector';
 const AddImageScreen = () => {
 
     const [toggleAddOptions, setToggleAddOptions] = useState(false);
-    const [toggleSelectPhotos, setSelectPhotos] = useState(false);
+    const [toggleSelectPhotos, setToggleSelectPhotos] = useState(false);
     const [toggleCamera, setToggleCamera] = useState(false);
     const [toggleVideo, setToggleVideo] = useState(false);
 
@@ -72,7 +72,16 @@ const AddImageScreen = () => {
 
             {
                 toggleAddOptions && (
-                    <FileSelector toggleAddOptions={toggleAddOptions} setToggleAddOptions={setToggleAddOptions}/>
+                    <FileSelector
+                        toggleAddOptions={toggleAddOptions}
+                        setToggleAddOptions={setToggleAddOptions}
+                        toggleSelectPhotos={toggleSelectPhotos}
+                        setToggleSelectPhotos={setToggleSelectPhotos}
+                        toggleCamera={toggleCamera}
+                        setToggleCamera={setToggleCamera}
+                        toggleVideo={toggleVideo}
+                        setToggleVideo={setToggleVideo}
+                    />
                 )
             }
         </SafeAreaView>

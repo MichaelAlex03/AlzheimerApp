@@ -5,6 +5,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import CustomButton from '@/components/CustomButton';
 import { COLORS } from '../../constants'
 import FileSelector from '@/components/FileSelector';
+import { router } from 'expo-router';
 
 
 const AddImageScreen = () => {
@@ -59,7 +60,7 @@ const AddImageScreen = () => {
             </View>
 
             <View style={styles.bottomNav}>
-                <TouchableOpacity style={styles.navItem}>
+                <TouchableOpacity style={styles.navItem} onPress={() => router.push('/(tabs)/Home')}>
                     <Text style={styles.navIcon}>⌂</Text>
                     <Text style={styles.navText}>Home</Text>
                 </TouchableOpacity>

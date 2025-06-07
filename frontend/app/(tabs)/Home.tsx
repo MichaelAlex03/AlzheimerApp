@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'rea
 import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import ImageSelector from '@/components/ImageSelector';
+import ImageSelector from '@/components/FileSelector';
 
 const COLORS = {
   background: '#24144A',

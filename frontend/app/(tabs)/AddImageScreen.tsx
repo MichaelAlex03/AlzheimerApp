@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { FontAwesome } from '@expo/vector-icons';
 import CustomButton from '@/components/CustomButton';
 import { COLORS } from '../../constants'
-import ImageSelector from '@/components/ImageSelector';
+import FileSelector from '@/components/FileSelector';
 
 
 const AddImageScreen = () => {
@@ -72,7 +72,7 @@ const AddImageScreen = () => {
 
             {
                 toggleAddOptions && (
-                    <ImageSelector toggleAddOptions={toggleAddOptions} setToggleAddOptions={setToggleAddOptions}/>
+                    <FileSelector toggleAddOptions={toggleAddOptions} setToggleAddOptions={setToggleAddOptions}/>
                 )
             }
         </SafeAreaView>

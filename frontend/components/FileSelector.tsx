@@ -43,7 +43,14 @@ const ImageSelector = ({ toggleAddOptions, setToggleAddOptions }: ImageSelectorP
                         </View>
                     </View>
 
+                    <View style={styles.buttonContainer}>
+                        <TouchableOpacity style={styles.closeButton} onPress={() => setToggleAddOptions(false)}>
+                            <Text style={styles.buttonText}>Close</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
+
+
             </View>
         </Modal>
     )
@@ -76,7 +83,7 @@ const styles = StyleSheet.create({
     selectorContainer: {
         flexDirection: 'row',
         gap: 40,
-        marginTop: 80
+        marginTop: 60
     },
     selector: {
         width: 120,
@@ -90,5 +97,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         gap: 20
+    },
+    buttonContainer: {
+        width: '100%',
+        alignItems: 'center',
+        marginTop: 20
+    },
+    closeButton: {
+        width: 219,
+        height: 75,
+        backgroundColor: '#D9D9D9',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 32
+    }, 
+    buttonText: {
+       fontSize: 28,
+       color: '#010101'
     }
 })

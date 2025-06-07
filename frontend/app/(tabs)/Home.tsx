@@ -1,29 +1,46 @@
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import ImageSelector from '@/components/ImageSelector';
 
 const COLORS = {
-  background: '#24144A',     
-  card: '#FFFFFF',          
-  accent: '#6C5DD3',         
-  accentLight: '#AFAFFF',     
-  accentDark: '#3D2C6B', 
+  background: '#24144A',
+  card: '#FFFFFF',
+  accent: '#6C5DD3',
+  accentLight: '#AFAFFF',
+  accentDark: '#3D2C6B',
   white: '#FFFFFF',
-  textPrimary: '#FFFFFF',       
-  textSecondary: '#6C5DD3',     
+  textPrimary: '#FFFFFF',
+  textSecondary: '#6C5DD3',
   navBackground: '#32235A',
   navText: '#E0E0E0',
   navIcon: '#AFAFFF',
-  border: '#B8B8D1',             
+  border: '#B8B8D1',
   placeholder: '#E8E8F2',
-  shadow: '#000000',             
+  shadow: '#000000',
 };
 
+
 const Landing = () => {
+
   const router = useRouter();
+  const [toggleAddOptions, setToggleAddOptions] = useState(false);
+  const [toggleSelectPhotos, setSelectPhotos] = useState(false);
+  const [toggleCamera, setToggleCamera] = useState(false);
+  const [toggleVideo, setToggleVideo] = useState(false);
+
+  const handleLogout = () => {
+
+  }
+
+  const handleNewTask = () => {
+
+  }
+
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.replace('/')}>
@@ -38,7 +55,7 @@ const Landing = () => {
         </View>
 
         <Text style={styles.sectionTitle}>Start New Task</Text>
-        <TouchableOpacity style={styles.imageUpload}>
+        <TouchableOpacity style={styles.imageUpload} onPress={() => router.push('/AddImageScreen')}>
           <Text style={styles.imageText}>Click to Add Image Here</Text>
         </TouchableOpacity>
 
@@ -109,7 +126,14 @@ const Landing = () => {
           <Text style={styles.navText}>Complete</Text>
         </TouchableOpacity>
       </View>
-    </View>
+
+      {
+        toggleAddOptions &&
+        (
+          <ImageSelector toggleAddOptions={toggleAddOptions} setToggleAddOptions={setToggleAddOptions}/>
+        )
+      }
+    </SafeAreaView>
   );
 };
 

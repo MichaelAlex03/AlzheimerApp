@@ -26,15 +26,15 @@ const ProfessionalVerification = () => {
   const { auth } = useAuth();
 
   const handleSubmit = async () => {
-    console.log("helloooo")
+  
     if (!orgName || !address || !zipcode || !city || !state) {
       setErrMsg('One or more fields are empty. Please fill in all fields');
       return;
     }
-    console.log("herrrrrr")
+  
     try {
 
-      console.log("trying")
+     
       // api call
       await axiosPrivate.post(PROFESSIONAL_URL, {
         organizationName: orgName,
@@ -165,7 +165,7 @@ const ProfessionalVerification = () => {
 
               <CustomButton
                 title='Continue'
-                onPress={handleSubmit}
+                onPress={() => handleSubmit}
                 width={250}
                 containerStyle={{ marginTop: 10 }}
               />

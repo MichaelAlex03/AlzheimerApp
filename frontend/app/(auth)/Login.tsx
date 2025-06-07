@@ -69,7 +69,7 @@ const Login = () => {
             width={340}
             onPress={() => {
                 handleLogin();
-                router.push('/Landing');
+                router.push('/Home');
             }}
         />
 

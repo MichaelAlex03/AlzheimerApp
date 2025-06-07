@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { Stack } from 'expo-router'
 
 const TabsLayout = () => {
   return (
-    <View>
-      <Text>_layout</Text>
-    </View>
+    <Stack>
+      <Stack.Screen name='Home' options={{headerShown: false}} />
+      <Stack.Screen name='AddImageScreen' options={{headerShown: false}} />
+    </Stack>
   )
 }
 

@@ -25,10 +25,7 @@ const COLORS = {
 const Landing = () => {
 
   const router = useRouter();
-  const [toggleAddOptions, setToggleAddOptions] = useState(false);
-  const [toggleSelectPhotos, setSelectPhotos] = useState(false);
-  const [toggleCamera, setToggleCamera] = useState(false);
-  const [toggleVideo, setToggleVideo] = useState(false);
+
 
   const handleLogout = () => {
 
@@ -127,12 +124,7 @@ const Landing = () => {
         </TouchableOpacity>
       </View>
 
-      {
-        toggleAddOptions &&
-        (
-          <ImageSelector toggleAddOptions={toggleAddOptions} setToggleAddOptions={setToggleAddOptions}/>
-        )
-      }
+    
     </SafeAreaView>
   );
 };

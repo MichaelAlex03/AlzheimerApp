@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { FontAwesome } from '@expo/vector-icons';
@@ -13,6 +13,9 @@ const AddImageScreen = () => {
     const [toggleSelectPhotos, setToggleSelectPhotos] = useState(false);
     const [toggleCamera, setToggleCamera] = useState(false);
     const [toggleVideo, setToggleVideo] = useState(false);
+    const [pictures, setPictures] = useState([] as string[]);
+
+    console.log(pictures)
 
     return (
         <SafeAreaView style={styles.container}>
@@ -34,15 +37,15 @@ const AddImageScreen = () => {
                 <View style={styles.pictureDisplayContainer}>
 
                     <View style={{ alignItems: 'flex-start', gap: 20 }}>
-                        <View style={styles.picture} />
+                        {!pictures[0] ? <View style={styles.picture} /> : <Image source={{ uri: pictures[0] }} style={styles.picture}/>}
                         <Text style={[styles.textStyles, { fontSize: 28, fontWeight: '700' }]}>Picture 1</Text>
                     </View>
                     <View style={{ alignItems: 'flex-start', gap: 20 }}>
-                        <View style={styles.picture} />
+                        {!pictures[1] ? <View style={styles.picture} /> : <Image source={{ uri: pictures[1] }} style={styles.picture}/>}
                         <Text style={[styles.textStyles, { fontSize: 28, fontWeight: '700' }]}>Picture 2</Text>
                     </View>
                     <View style={{ alignItems: 'flex-start', gap: 20 }}>
-                        <View style={styles.picture} />
+                        {!pictures[2] ? <View style={styles.picture} /> : <Image source={{ uri: pictures[2] }} style={styles.picture}/>}
                         <Text style={[styles.textStyles, { fontSize: 28, fontWeight: '700' }]}>Picture 3</Text>
                     </View>
 
@@ -81,6 +84,8 @@ const AddImageScreen = () => {
                         setToggleCamera={setToggleCamera}
                         toggleVideo={toggleVideo}
                         setToggleVideo={setToggleVideo}
+                        pictures={pictures}
+                        setPictures={setPictures}
                     />
                 )
             }

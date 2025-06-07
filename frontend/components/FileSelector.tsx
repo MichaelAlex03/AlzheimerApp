@@ -1,8 +1,9 @@
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { Image } from 'react-native'
+import ImageSelector from './ImageSelector'
 
-interface ImageSelectorProps {
+interface FileSelectorProps {
     toggleAddOptions: boolean,
     setToggleAddOptions: (val: boolean) => void,
     toggleSelectPhotos: boolean,
@@ -10,10 +11,12 @@ interface ImageSelectorProps {
     toggleCamera: boolean,
     setToggleCamera: (val: boolean) => void,
     toggleVideo: boolean,
-    setToggleVideo: (val: boolean) => void
+    setToggleVideo: (val: boolean) => void,
+    pictures: string[],
+    setPictures: (val: string[]) => void
 }
 
-const ImageSelector = (
+const FileSelector = (
     {
         toggleAddOptions,
         setToggleAddOptions,
@@ -22,9 +25,13 @@ const ImageSelector = (
         toggleCamera,
         setToggleCamera,
         toggleVideo,
-        setToggleVideo
-    }: ImageSelectorProps
+        setToggleVideo,
+        pictures,
+        setPictures
+    }: FileSelectorProps
 ) => {
+
+
     return (
         <Modal
             visible={toggleAddOptions}
@@ -38,12 +45,7 @@ const ImageSelector = (
 
                     <View style={styles.selectorContainer}>
 
-                        <View style={styles.selectorView}>
-                            <TouchableOpacity style={styles.selector}>
-                                <Image source={require('../assets/images/folderImg.png')} />
-                            </TouchableOpacity>
-                            <Text style={[styles.textStyles, { fontSize: 28 }]}>Existing Image</Text>
-                        </View>
+                        <ImageSelector pictures={pictures} setPictures={setPictures}/>
 
                         <View style={styles.selectorView}>
                             <TouchableOpacity style={styles.selector}>
@@ -73,7 +75,7 @@ const ImageSelector = (
     )
 }
 
-export default ImageSelector
+export default FileSelector
 
 const styles = StyleSheet.create({
     container: {

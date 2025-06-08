@@ -26,9 +26,9 @@ const AddImageScreen = () => {
             <TouchableOpacity style={styles.profileContainer} onPress={() => setToggleSideBar(true)}>
                 <FontAwesome name="user-circle" size={48} color="white" />
             </TouchableOpacity>
-            
 
-            <View style={{position: 'absolute', height: '100%', left:0 }}>
+
+            <View style={{ position: 'absolute' }}>
                 <ProfileSideBar toggleSideBar={toggleSideBar} setToggleSideBar={setToggleSideBar} />
             </View>
 

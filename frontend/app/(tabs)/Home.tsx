@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'rea
 import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import ImageSelector from '@/components/FileSelector';
+import ProfileSideBar from '@/components/ProfileSideBar';
 
 const COLORS = {
   background: '#24144A',
@@ -26,6 +26,8 @@ const Landing = () => {
 
   const router = useRouter();
 
+  const [toggleSideBar, setToggleSideBar] = useState(false);
+
 
   const handleLogout = () => {
 
@@ -39,6 +41,11 @@ const Landing = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+
+        <View style={{ position: 'absolute' }}>
+          <ProfileSideBar toggleSideBar={toggleSideBar} setToggleSideBar={setToggleSideBar} />
+        </View>
+
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.replace('/')}>
             <Text style={styles.backButton}>← Back</Text>
@@ -46,7 +53,7 @@ const Landing = () => {
           <View style={styles.profileContainer}>
             <View style={styles.profileIcon} />
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => setToggleSideBar(true)}>
             <Text style={styles.menuIcon}>☰</Text>
           </TouchableOpacity>
         </View>
@@ -124,7 +131,7 @@ const Landing = () => {
         </TouchableOpacity>
       </View>
 
-    
+
     </SafeAreaView>
   );
 };

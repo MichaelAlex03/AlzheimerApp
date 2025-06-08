@@ -36,7 +36,7 @@ const ProfileSideBar = ({ toggleSideBar, setToggleSideBar }: SideBarProps) => {
         </View>
 
         <View style={styles.optionContainer}>
-          <TouchableOpacity style={styles.option}>
+          <TouchableOpacity style={[styles.option, { borderTopWidth: 10 }]}>
             <Text style={styles.optionsTextStyles}>Account Details</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.option}>
@@ -48,8 +48,8 @@ const ProfileSideBar = ({ toggleSideBar, setToggleSideBar }: SideBarProps) => {
           <TouchableOpacity style={styles.option}>
             <Text style={styles.optionsTextStyles}>Other</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.option}>
-            <Text style={[styles.optionsTextStyles, { borderBottomWidth: 10, width: 559, borderBottomColor: 'white', paddingBottom: 10 }]}>Reset File</Text>
+          <TouchableOpacity style={[styles.option, { borderBottomWidth: 10 }]}>
+            <Text style={styles.optionsTextStyles}>Reset File</Text>
           </TouchableOpacity>
 
         </View>
@@ -101,13 +101,15 @@ const styles = StyleSheet.create({
   },
   optionContainer: {
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 30,
   },
   option: {
     width: 559,
     height: 90,
     borderTopColor: 'white',
-    borderTopWidth: 10,
+    borderTopWidth: 5,
+    borderBottomColor: 'white',
+    borderBottomWidth: 5,
     justifyContent: 'center',
     alignItems: 'center'
   },

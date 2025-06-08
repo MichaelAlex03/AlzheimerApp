@@ -6,6 +6,7 @@ import CustomButton from '@/components/CustomButton';
 import { COLORS } from '../../constants'
 import FileSelector from '@/components/FileSelector';
 import { router } from 'expo-router';
+import ProfileSideBar from '@/components/ProfileSideBar';
 
 
 const AddImageScreen = () => {
@@ -15,14 +16,20 @@ const AddImageScreen = () => {
     const [toggleCamera, setToggleCamera] = useState(false);
     const [toggleVideo, setToggleVideo] = useState(false);
     const [pictures, setPictures] = useState([] as string[]);
+    const [toggleSideBar, setToggleSideBar] = useState(false)
 
     console.log(pictures)
 
     return (
         <SafeAreaView style={styles.container}>
 
-            <View style={styles.profileContainer}>
+            <TouchableOpacity style={styles.profileContainer} onPress={() => setToggleSideBar(true)}>
                 <FontAwesome name="user-circle" size={48} color="white" />
+            </TouchableOpacity>
+            
+
+            <View style={{position: 'absolute', height: '100%', left:0 }}>
+                <ProfileSideBar toggleSideBar={toggleSideBar} setToggleSideBar={setToggleSideBar} />
             </View>
 
 
@@ -38,15 +45,15 @@ const AddImageScreen = () => {
                 <View style={styles.pictureDisplayContainer}>
 
                     <View style={{ alignItems: 'flex-start', gap: 20 }}>
-                        {!pictures[0] ? <View style={styles.picture} /> : <Image source={{ uri: pictures[0] }} style={styles.picture}/>}
+                        {!pictures[0] ? <View style={styles.picture} /> : <Image source={{ uri: pictures[0] }} style={styles.picture} />}
                         <Text style={[styles.textStyles, { fontSize: 28, fontWeight: '700' }]}>Picture 1</Text>
                     </View>
                     <View style={{ alignItems: 'flex-start', gap: 20 }}>
-                        {!pictures[1] ? <View style={styles.picture} /> : <Image source={{ uri: pictures[1] }} style={styles.picture}/>}
+                        {!pictures[1] ? <View style={styles.picture} /> : <Image source={{ uri: pictures[1] }} style={styles.picture} />}
                         <Text style={[styles.textStyles, { fontSize: 28, fontWeight: '700' }]}>Picture 2</Text>
                     </View>
                     <View style={{ alignItems: 'flex-start', gap: 20 }}>
-                        {!pictures[2] ? <View style={styles.picture} /> : <Image source={{ uri: pictures[2] }} style={styles.picture}/>}
+                        {!pictures[2] ? <View style={styles.picture} /> : <Image source={{ uri: pictures[2] }} style={styles.picture} />}
                         <Text style={[styles.textStyles, { fontSize: 28, fontWeight: '700' }]}>Picture 3</Text>
                     </View>
 

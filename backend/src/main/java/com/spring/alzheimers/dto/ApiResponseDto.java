@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class ApiResponseDto {
-    private String message;
+    private final String message;
 
     public ApiResponseDto(String message){
         this.message = message;

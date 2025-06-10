@@ -1,9 +1,13 @@
 package com.spring.alzheimers.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
-public class RegisterProfressionalDto {
+@Setter
+@NoArgsConstructor
+public class RegisterProfessionalDto {
 
     private String organizationName;
     private String address;

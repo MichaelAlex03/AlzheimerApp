@@ -1,6 +1,6 @@
 package com.spring.alzheimers.service;
 
-import com.spring.alzheimers.dto.RegisterProfressionalDto;
+import com.spring.alzheimers.dto.RegisterProfessionalDto;
 import com.spring.alzheimers.model.Professional;
 import com.spring.alzheimers.repository.ProfessionalRepository;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class ProfessionalService {
         this.professionalRepository = professionalRepository;
     }
 
-    public void create(RegisterProfressionalDto input){
+    public void create(RegisterProfessionalDto input){
         Professional professional = new Professional(
                 input.getOrganizationName(),
                 input.getAddress(),

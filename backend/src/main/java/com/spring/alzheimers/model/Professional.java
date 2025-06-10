@@ -32,6 +32,9 @@ public class Professional  {
     @Column(name = "user_id")
     private long userId;
 
+    public Professional(){
+
+    }
 
     public Professional(
             String organizationName,

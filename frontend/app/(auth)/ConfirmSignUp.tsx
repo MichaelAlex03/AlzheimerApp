@@ -14,7 +14,6 @@ const ConfirmSignUp = () => {
 
   const { email, userType } = useLocalSearchParams();
   const [verificationCode, setVerificationCode] = useState('');
-  const [errMsg, setErrMsg] = useState('');
 
   const handleResendEmail = async () => {
     try {
@@ -40,7 +39,7 @@ const ConfirmSignUp = () => {
       console.log("TEsttt")
 
       if (userType === "Professional") {
-        router.push({pathname: "/ProfessionalVerification", params: {}});
+        router.push({pathname: "/ProfessionalVerification", params: { userId: response.data.userId}});
       } else {
         router.push("/Login");
       }

@@ -161,7 +161,7 @@ const SignUp = () => {
           <CustomButton
             title="Sign Up With Apple "
             width={340}
-            onPress={handleSubmit}
+            onPress={() => {}}
             containerStyle={{ backgroundColor: '#222222', marginTop: 10 }}
           />
 

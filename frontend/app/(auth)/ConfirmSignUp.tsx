@@ -17,7 +17,7 @@ const ConfirmSignUp = () => {
 
   const handleResendEmail = async () => {
     try {
-      await axios.post(RESEND_URL, {
+      await axios.post(RESEND_URL, null, {
         params: {
           email: email
         }
@@ -75,7 +75,6 @@ const ConfirmSignUp = () => {
               width={310}
               onPress={() => {
                 handleVerifyCode();
-      
               }}
               containerStyle={{ marginTop: 30 }}
             />

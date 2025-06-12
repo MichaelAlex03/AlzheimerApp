@@ -23,6 +23,8 @@ const Login = () => {
       });
 
       console.log("response", response)
+
+      router.push('/Home')
     } catch (error) {
       
     }
@@ -69,7 +71,6 @@ const Login = () => {
             width={340}
             onPress={() => {
                 handleLogin();
-                router.push('/Home');
             }}
         />
 

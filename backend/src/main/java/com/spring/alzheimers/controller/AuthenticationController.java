@@ -75,4 +75,9 @@ public class AuthenticationController {
     public ResponseEntity<?> refreshToken(){
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
+    @GetMapping("/logout")
+    public ResponseEntity<?> logout(){
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 }

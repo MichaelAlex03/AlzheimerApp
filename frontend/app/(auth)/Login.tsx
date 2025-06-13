@@ -29,7 +29,9 @@ const Login = () => {
         accessToken: response.data.token,
         email: response.data.email,
         enabled: response.data.enabled,
-        userId: response.data.userId
+        userId: response.data.userId,
+        firstName: response.data.firstName,
+        lastName: response.data.lastName
       })
 
       setIsLoggedIn(true);

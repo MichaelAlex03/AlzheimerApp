@@ -5,7 +5,9 @@ interface AuthProps {
     accessToken: string
     email: string
     enabled: boolean
-    userId: number
+    userId: number,
+    firstName: string,
+    lastName: string
 }
 
 interface AuthContextType{

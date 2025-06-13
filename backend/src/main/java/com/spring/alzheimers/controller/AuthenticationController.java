@@ -53,7 +53,9 @@ public class AuthenticationController {
                         authenticatedUser.getRefreshToken(),
                         authenticatedUser.getId(),
                         authenticatedUser.getEmail(),
-                        authenticatedUser.isEnabled()
+                        authenticatedUser.isEnabled(),
+                        authenticatedUser.getFirstName(),
+                        authenticatedUser.getLastName()
                 ));
     }
 

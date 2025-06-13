@@ -83,11 +83,10 @@ public class AuthenticationService {
                 )
         );
 
-        return user;
+        return userRepository.save(user);
     }
 
     public User verifyUser(VerifyUserDto input){
-        System.out.println("HERE" + input.getEmail());
         Optional<User> optionalUser = userRepository.findByEmail(input.getEmail());
         if(optionalUser.isPresent()){
             User user = optionalUser.get();
@@ -137,6 +136,12 @@ public class AuthenticationService {
     private Integer generateVerificationCode(){
         Random random = new Random();
         return random.nextInt(900000) + 100000;
+    }
+
+    public void logout(String email){
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        optionalUser.ifPresent(user -> user.setRefreshToken(null));
+
     }
 
 }

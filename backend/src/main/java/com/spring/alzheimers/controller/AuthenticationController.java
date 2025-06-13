@@ -1,17 +1,18 @@
 package com.spring.alzheimers.controller;
 
-import com.spring.alzheimers.dto.ApiResponseDto;
-import com.spring.alzheimers.dto.LoginUserDto;
-import com.spring.alzheimers.dto.RegisterUserDto;
-import com.spring.alzheimers.dto.VerifyUserDto;
+import com.spring.alzheimers.dto.*;
 import com.spring.alzheimers.model.User;
 import com.spring.alzheimers.responses.LoginResponse;
+import com.spring.alzheimers.responses.RefreshResponse;
 import com.spring.alzheimers.responses.VerifyResponse;
 import com.spring.alzheimers.service.AuthenticationService;
 import com.spring.alzheimers.service.JwtService;
+import com.spring.alzheimers.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RequestMapping("/auth")
 @RestController
@@ -21,12 +22,16 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
+    private final UserService userService;
+
     public AuthenticationController(
             JwtService jwtService,
-            AuthenticationService authenticationService
+            AuthenticationService authenticationService,
+            UserService userService
     ){
         this.jwtService = jwtService;
         this.authenticationService = authenticationService;
+        this.userService = userService;
     }
 
     @PostMapping("/signup")
@@ -41,10 +46,15 @@ public class AuthenticationController {
     public ResponseEntity<LoginResponse> login(@RequestBody LoginUserDto loginUserDto){
         User authenticatedUser = authenticationService.authenticate(loginUserDto);
         String jwtToken = jwtService.generateToken(authenticatedUser);
-        String refreshToken = jwtService.generateRefreshToken(authenticatedUser);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(new LoginResponse(jwtToken, refreshToken, authenticatedUser.getId()));
+                .body(new LoginResponse(
+                        jwtToken,
+                        authenticatedUser.getRefreshToken(),
+                        authenticatedUser.getId(),
+                        authenticatedUser.getEmail(),
+                        authenticatedUser.isEnabled()
+                ));
     }
 
     @PostMapping("/verify")
@@ -72,12 +82,38 @@ public class AuthenticationController {
     }
 
     @GetMapping("/refresh")
-    public ResponseEntity<?> refreshToken(){
-        return ResponseEntity.ok(HttpStatus.OK);
+    public ResponseEntity<RefreshResponse> refreshToken(@RequestBody RefreshDto refreshDto) {
+
+        if(authenticationService.doesUserExist(refreshDto.getEmail())){
+            Optional<User> optionalUser = userService.getUserInfo(refreshDto.getEmail());
+            if(optionalUser.isPresent()){
+                User user = optionalUser.get();
+                boolean check = jwtService.isTokenValid(refreshDto.getRefreshToken(), user);
+                if(check){
+                    String jwtToken = jwtService.generateToken(user);
+                    return ResponseEntity
+                            .status(HttpStatus.OK)
+                            .body(new RefreshResponse(jwtToken));
+                }
+            }
+        } else {
+            return ResponseEntity
+                    .badRequest()
+                    .body(null);
+        }
+
+        return null;
     }
 
+
     @GetMapping("/logout")
-    public ResponseEntity<?> logout(){
-        return ResponseEntity.ok(HttpStatus.OK);
+    public ResponseEntity<?> logout(@RequestParam String email){
+        try{
+            authenticationService.logout(email);
+            return ResponseEntity.ok(HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
     }
 }

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ProfileSideBar from '@/components/ProfileSideBar';
+import useAuth from '@/hooks/useAuth';
+import axios from '@/api/axios';
 
 const COLORS = {
   background: '#24144A',
@@ -27,15 +29,24 @@ const LOGOUT_URL = "/auth/logout"
 const Landing = () => {
 
   const router = useRouter();
+  
+  const { auth, setIsLoggedIn } = useAuth();
+  console.log(auth)
 
   const [toggleSideBar, setToggleSideBar] = useState(false);
 
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     try {
-      
+      await axios.get(LOGOUT_URL, {
+        params: {
+          email: auth?.email
+        }
+      })
+
+      setIsLoggedIn(false);
     } catch (error) {
-      
+      console.error(error);
     }
   }
 

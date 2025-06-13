@@ -14,7 +14,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { setAuth } = useAuth()
+  const { setAuth, setIsLoggedIn } = useAuth()
 
   const axiosPrivate = useAxiosPrivate();
 
@@ -31,6 +31,8 @@ const Login = () => {
         enabled: response.data.enabled,
         userId: response.data.userId
       })
+
+      setIsLoggedIn(true);
 
       await SecureStore.setItemAsync("refreshToken", response.data.refreshToken);
 

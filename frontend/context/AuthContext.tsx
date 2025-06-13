@@ -21,7 +21,7 @@ interface AuthProviderProps{
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
-const AuthProvider = ({ children }: AuthProviderProps ) => {
+export const AuthProvider = ({ children }: AuthProviderProps ) => {
     const [auth, setAuth] = useState<AuthProps>({} as AuthProps);
     const [loggedIn, setIsLoggedIn] = useState(false);
 

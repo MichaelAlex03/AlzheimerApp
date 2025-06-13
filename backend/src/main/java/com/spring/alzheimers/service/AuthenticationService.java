@@ -140,8 +140,11 @@ public class AuthenticationService {
 
     public void logout(String email){
         Optional<User> optionalUser = userRepository.findByEmail(email);
-        optionalUser.ifPresent(user -> user.setRefreshToken(null));
-
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+            user.setRefreshToken(null);
+            userRepository.save(user);
+        }
     }
 
 }

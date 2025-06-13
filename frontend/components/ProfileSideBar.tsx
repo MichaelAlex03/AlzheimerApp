@@ -1,17 +1,35 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import Modal from 'react-native-modal';
 import React from 'react'
+import useAuth from '@/hooks/useAuth';
+import axios from '@/api/axios';
+import { router } from 'expo-router';
 
 interface SideBarProps {
   toggleSideBar: boolean,
   setToggleSideBar: (val: boolean) => void
 }
 
+const LOGOUT_URL = "/auth/logout"
+
 const ProfileSideBar = ({ toggleSideBar, setToggleSideBar }: SideBarProps) => {
 
-  const handleSignOut = async () => {
+  const { auth, setIsLoggedIn } = useAuth();
 
-  }
+  const handleLogout = async () => {
+      try {
+        await axios.get(LOGOUT_URL, {
+          params: {
+            email: auth?.email
+          }
+        })
+  
+        setIsLoggedIn(false);
+        router.replace("/");
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
   return (
     <Modal
@@ -26,11 +44,11 @@ const ProfileSideBar = ({ toggleSideBar, setToggleSideBar }: SideBarProps) => {
 
         <View style={styles.imageContainer}>
           <Image source={require('../assets/images/profile.png')} />
-          <Text style={[styles.textStyles, { fontSize: 32, fontWeight: '500' }]}>Name Placeholder</Text>
+          <Text style={[styles.textStyles, { fontSize: 32, fontWeight: '500' }]}>{auth.firstName} {auth.lastName}</Text>
         </View>
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={handleSignOut} style={styles.signoutButton}>
+          <TouchableOpacity onPress={handleLogout} style={styles.signoutButton}>
             <Text style={styles.buttonText}>Sign Out</Text>
           </TouchableOpacity>
         </View>

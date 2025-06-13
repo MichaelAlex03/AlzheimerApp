@@ -45,6 +45,7 @@ const Landing = () => {
       })
 
       setIsLoggedIn(false);
+      router.replace("/");
     } catch (error) {
       console.error(error);
     }
@@ -64,8 +65,8 @@ const Landing = () => {
         </View>
 
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => router.replace('/')}>
-            <Text style={styles.backButton}>← Back</Text>
+          <TouchableOpacity onPress={handleLogout}>
+            <Text style={styles.backButton}>← Back To Login</Text>
           </TouchableOpacity>
           <View style={styles.profileContainer}>
             <View style={styles.profileIcon} />

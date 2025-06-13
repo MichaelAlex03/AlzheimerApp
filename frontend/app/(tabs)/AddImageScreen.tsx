@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { FontAwesome } from '@expo/vector-icons';
-import CustomButton from '@/components/CustomButton';
 import { COLORS } from '../../constants'
 import FileSelector from '@/components/FileSelector';
 import { router } from 'expo-router';
@@ -19,7 +18,7 @@ const AddImageScreen = () => {
     const [toggleSideBar, setToggleSideBar] = useState(false)
 
     const submitImages = async () => {
-        
+        router.push("/VisualizedData");
     }
 
     return (
@@ -63,7 +62,7 @@ const AddImageScreen = () => {
             </View>
 
             <View style={{ alignItems: 'flex-end', width: '100%' }}>
-                <TouchableOpacity style={styles.confirmButton}>
+                <TouchableOpacity style={styles.confirmButton} onPress={submitImages}>
                     <Text style={{ fontSize: 28, color: '#010101' }}>Confirm</Text>
                 </TouchableOpacity>
             </View>

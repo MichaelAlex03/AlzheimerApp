@@ -5,25 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ProfileSideBar from '@/components/ProfileSideBar';
 import useAuth from '@/hooks/useAuth';
 import axios from '@/api/axios';
+import { COLORS, LOGOUT_URL } from '@/constants';
 
-const COLORS = {
-  background: '#24144A',
-  card: '#FFFFFF',
-  accent: '#6C5DD3',
-  accentLight: '#AFAFFF',
-  accentDark: '#3D2C6B',
-  white: '#FFFFFF',
-  textPrimary: '#FFFFFF',
-  textSecondary: '#6C5DD3',
-  navBackground: '#32235A',
-  navText: '#E0E0E0',
-  navIcon: '#AFAFFF',
-  border: '#B8B8D1',
-  placeholder: '#E8E8F2',
-  shadow: '#000000',
-};
-
-const LOGOUT_URL = "/auth/logout"
 
 
 const Landing = () => {

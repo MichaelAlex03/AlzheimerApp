@@ -6,6 +6,7 @@ import CustomButton from '@/components/CustomButton';
 import { router } from 'expo-router';
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 import useAuth from '@/hooks/useAuth';
+import * as SecureStore from 'expo-secure-store';
 
 const LOGIN_URL = '/auth/login';
 
@@ -30,6 +31,8 @@ const Login = () => {
         enabled: response.data.enabled,
         userId: response.data.userId
       })
+
+      await SecureStore.setItemAsync("refreshToken", response.data.refreshToken);
 
       console.log("response", response)
       if (response.status === 200) {

@@ -4,9 +4,27 @@ import lombok.Getter;
 
 @Getter
 public class RefreshResponse {
-    private final String accessToken;
 
-    public RefreshResponse(String accessToken){
-        this.accessToken = accessToken;
+    private final String token;
+    private final long userId;
+    private final String email;
+    private final boolean enabled;
+    private final String firstName;
+    private final String lastName;
+
+    public RefreshResponse(
+            String token,
+            long userId,
+            String email,
+            boolean enabled,
+            String firstName,
+            String lastName
+    ){
+        this.token = token;
+        this.userId = userId;
+        this.email = email;
+        this.enabled = enabled;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 }

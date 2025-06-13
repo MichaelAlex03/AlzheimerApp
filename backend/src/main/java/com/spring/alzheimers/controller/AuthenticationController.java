@@ -84,18 +84,25 @@ public class AuthenticationController {
     }
 
     @GetMapping("/refresh")
-    public ResponseEntity<RefreshResponse> refreshToken(@RequestBody RefreshDto refreshDto) {
+    public ResponseEntity<RefreshResponse> refreshToken(@RequestParam String email, String refreshToken) {
 
-        if(authenticationService.doesUserExist(refreshDto.getEmail())){
-            Optional<User> optionalUser = userService.getUserInfo(refreshDto.getEmail());
+        if(authenticationService.doesUserExist(email)){
+            Optional<User> optionalUser = userService.getUserInfo(email);
             if(optionalUser.isPresent()){
                 User user = optionalUser.get();
-                boolean check = jwtService.isTokenValid(refreshDto.getRefreshToken(), user);
+                boolean check = jwtService.isTokenValid(refreshToken, user);
                 if(check){
                     String jwtToken = jwtService.generateToken(user);
                     return ResponseEntity
                             .status(HttpStatus.OK)
-                            .body(new RefreshResponse(jwtToken));
+                            .body(new RefreshResponse(
+                                    jwtToken,
+                                    user.getId(),
+                                    user.getEmail(),
+                                    user.isEnabled(),
+                                    user.getFirstName(),
+                                    user.getLastName()
+                            ));
                 }
             }
         } else {

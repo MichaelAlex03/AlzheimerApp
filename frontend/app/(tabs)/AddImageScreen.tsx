@@ -18,7 +18,9 @@ const AddImageScreen = () => {
     const [pictures, setPictures] = useState([] as string[]);
     const [toggleSideBar, setToggleSideBar] = useState(false)
 
-    console.log(pictures)
+    const submitImages = async () => {
+        
+    }
 
     return (
         <SafeAreaView style={styles.container}>

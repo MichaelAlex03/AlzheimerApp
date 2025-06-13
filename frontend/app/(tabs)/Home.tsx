@@ -21,6 +21,8 @@ const COLORS = {
   shadow: '#000000',
 };
 
+const LOGOUT_URL = "/auth/logout"
+
 
 const Landing = () => {
 
@@ -30,7 +32,11 @@ const Landing = () => {
 
 
   const handleLogout = () => {
-
+    try {
+      
+    } catch (error) {
+      
+    }
   }
 
   const handleNewTask = () => {

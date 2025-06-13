@@ -4,14 +4,16 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
 import { router } from 'expo-router';
-import { axiosPrivate } from '@/api/axios';
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
+import useAuth from '@/hooks/useAuth';
 
 const LOGIN_URL = '/auth/login';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const { setAuth } = useAuth()
 
   const axiosPrivate = useAxiosPrivate();
 
@@ -22,11 +24,19 @@ const Login = () => {
         password
       });
 
-      console.log("response", response)
+      setAuth({
+        accessToken: response.data.token,
+        email: response.data.email,
+        enabled: response.data.enabled,
+        userId: response.data.userId
+      })
 
-      router.push('/Home')
+      console.log("response", response)
+      if (response.status === 200) {
+        router.push('/Home')
+      }
     } catch (error) {
-      
+      console.error(error)
     }
   };
 
@@ -67,11 +77,11 @@ const Login = () => {
         </View>
 
         <CustomButton
-            title="Sign In"
-            width={340}
-            onPress={() => {
-                handleLogin();
-            }}
+          title="Sign In"
+          width={340}
+          onPress={() => {
+            handleLogin();
+          }}
         />
 
 
@@ -82,7 +92,7 @@ const Login = () => {
           </Text>
           <TouchableOpacity onPress={() => router.push('/SignUp')}>
             <Text
-              style={[styles.textStyle, { fontSize: 16, color: '#007AFF', marginTop: 16  }]}
+              style={[styles.textStyle, { fontSize: 16, color: '#007AFF', marginTop: 16 }]}
             >
               Sign up
             </Text>
@@ -98,7 +108,7 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2E2466', 
+    backgroundColor: '#2E2466',
   },
   backgroundContainer: {
     flex: 1,
@@ -108,14 +118,14 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 700, 
-    backgroundColor: '#FFFFFF', 
+    height: 700,
+    backgroundColor: '#FFFFFF',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingHorizontal: 20,
     paddingTop: 30,
     paddingBottom: 20,
-    alignItems: 'center', 
+    alignItems: 'center',
   },
   inputContainer: {
     width: 340,
@@ -123,6 +133,6 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   textStyle: {
-    color: '#222222', 
+    color: '#222222',
   },
 });

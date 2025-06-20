@@ -11,6 +11,7 @@ public class RefreshResponse {
     private final boolean enabled;
     private final String firstName;
     private final String lastName;
+    private final boolean firstTime;
 
     public RefreshResponse(
             String token,
@@ -18,7 +19,8 @@ public class RefreshResponse {
             String email,
             boolean enabled,
             String firstName,
-            String lastName
+            String lastName,
+            boolean firstTime
     ){
         this.token = token;
         this.userId = userId;
@@ -26,5 +28,6 @@ public class RefreshResponse {
         this.enabled = enabled;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.firstTime = firstTime;
     }
 }

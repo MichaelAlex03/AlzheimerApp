@@ -59,16 +59,22 @@ public class User implements UserDetails {
     @Column(name = "refresh_token")
     private String refreshToken;
 
+    @Getter
+    @Setter
+    @Column(name = "first_time")
+    private Boolean firstTime;
+
     public User(){
 
     }
 
-    public User(String firstName, String lastName, String email, String password, String userType){
+    public User(String firstName, String lastName, String email, String password, String userType, boolean firstTime){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.userType = userType;
+        this.firstTime = firstTime;
     }
 
 

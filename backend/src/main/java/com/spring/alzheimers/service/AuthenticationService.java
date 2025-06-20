@@ -54,7 +54,8 @@ public class AuthenticationService {
                     input.getLastName(),
                     input.getEmail(),
                     passwordEncoder.encode(input.getPassword()),
-                    input.getUserType()
+                    input.getUserType(),
+                    true
             );
             user.setVerificationCode(generateVerificationCode());
             user.setVerificationCodeExpiresAt(LocalDateTime.now().plusMinutes(15));

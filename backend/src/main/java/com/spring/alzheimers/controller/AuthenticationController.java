@@ -55,7 +55,8 @@ public class AuthenticationController {
                         authenticatedUser.getEmail(),
                         authenticatedUser.isEnabled(),
                         authenticatedUser.getFirstName(),
-                        authenticatedUser.getLastName()
+                        authenticatedUser.getLastName(),
+                        true
                 ));
     }
 
@@ -101,7 +102,8 @@ public class AuthenticationController {
                                     user.getEmail(),
                                     user.isEnabled(),
                                     user.getFirstName(),
-                                    user.getLastName()
+                                    user.getLastName(),
+                                    user.getFirstTime()
                             ));
                 }
             }

@@ -14,6 +14,7 @@ public class LoginResponse {
     private boolean enabled;
     private String firstName;
     private String lastName;
+    private boolean firstTime;
 
     public LoginResponse(
             String token,
@@ -22,7 +23,8 @@ public class LoginResponse {
             String email,
             boolean enabled,
             String firstName,
-            String lastName
+            String lastName,
+            boolean firstTime
     ){
         this.token = token;
         this.refreshToken = refreshToken;
@@ -31,5 +33,6 @@ public class LoginResponse {
         this.enabled = enabled;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.firstTime = firstTime;
     }
 }

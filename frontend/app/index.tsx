@@ -1,6 +1,6 @@
 import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -19,7 +19,7 @@ export default function Index() {
           <CustomButton
             title={"Login"}
             width={270}
-            onPress={() => (router.push('/Login'))}
+            onPress={() => (router.push('/(tabs)/Home'))}
           />
           <CustomButton
             title={"Sign Up"}

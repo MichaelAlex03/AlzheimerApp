@@ -1,11 +1,12 @@
-import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
-import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import ProfileSideBar from '@/components/ProfileSideBar';
-import useAuth from '@/hooks/useAuth';
 import axios from '@/api/axios';
+import ProfileSideBar from '@/components/ProfileSideBar';
+import TutorialStage1 from '@/components/Tutorial/TutorialStage1';
 import { COLORS, LOGOUT_URL } from '@/constants';
+import useAuth from '@/hooks/useAuth';
+import { useRouter } from 'expo-router';
+import React, { useState } from 'react';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 
@@ -17,6 +18,7 @@ const Landing = () => {
   console.log(auth)
 
   const [toggleSideBar, setToggleSideBar] = useState(false);
+  const [firstTime, setFirstTime] = useState(true);
 
 
   const handleLogout = async () => {
@@ -131,6 +133,11 @@ const Landing = () => {
           <Text style={styles.navText}>Complete</Text>
         </TouchableOpacity>
       </View>
+      {
+        firstTime && (
+          <TutorialStage1 firstTime={firstTime} setFirstTime={setFirstTime}/>
+        )
+      }
 
 
     </SafeAreaView>

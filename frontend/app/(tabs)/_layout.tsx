@@ -1,17 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
-import { Redirect, router, Stack } from 'expo-router'
-import useAuth from '@/hooks/useAuth'
+import { Stack } from 'expo-router'
+import React from 'react'
 
 const TabsLayout = () => {
 
-  const { loggedIn } = useAuth();
+  // const { loggedIn } = useAuth();
 
-  useEffect(() => {
-    if (!loggedIn) {
-      return router.replace("/Login")
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!loggedIn) {
+  //     return router.replace("/Login")
+  //   }
+  // }, [])
 
   return (
     <Stack>

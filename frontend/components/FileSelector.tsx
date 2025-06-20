@@ -1,8 +1,7 @@
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
-import { Image } from 'react-native'
+import React from 'react'
+import { Image, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import ImageSelector from './ImageSelector'
-import Camera from './Camera'
+// import Camera from './Camera'
 
 interface FileSelectorProps {
     toggleAddOptions: boolean,
@@ -55,11 +54,11 @@ const FileSelector = (
                             <Text style={[styles.textStyles, { fontSize: 28 }]}>Picture</Text>
                         </View>
                         {
-                            toggleCamera && (
-                                <View style={{ flex: 1, position: 'absolute', width: '100%', height: '100%', zIndex: 10}}>
-                                    <Camera />
-                                </View>
-                            )
+                            // toggleCamera && (
+                            //     <View style={{ flex: 1, position: 'absolute', width: '100%', height: '100%', zIndex: 10}}>
+                            //         <Camera />
+                            //     </View>
+                            // )
                         }
 
                         <View style={styles.selectorView}>

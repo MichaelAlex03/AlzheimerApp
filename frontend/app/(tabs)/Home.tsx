@@ -13,12 +13,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const Landing = () => {
 
   const router = useRouter();
-  
+
   const { auth, setIsLoggedIn } = useAuth();
   console.log(auth)
 
   const [toggleSideBar, setToggleSideBar] = useState(false);
   const [firstTime, setFirstTime] = useState(true);
+  const [tutorialStage, setTutorialStage] = useState(1);
+  const [tutorialMode, setTutorialMode] = useState(false);
 
 
   const handleLogout = async () => {
@@ -133,13 +135,10 @@ const Landing = () => {
           <Text style={styles.navText}>Complete</Text>
         </TouchableOpacity>
       </View>
-      {
-        firstTime && (
-          <TutorialStage1 firstTime={firstTime} setFirstTime={setFirstTime}/>
-        )
-      }
 
-
+      {tutorialStage === 1 && (
+        <TutorialStage1 tutorialStage={tutorialStage} setTutorialStage={setTutorialStage} />
+      )}
     </SafeAreaView>
   );
 };

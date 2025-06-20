@@ -1,16 +1,18 @@
 import { COLORS } from '@/constants'
-import React from 'react'
+import React, { useState } from 'react'
 import { Image, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 interface TutorialProps {
-    firstTime: boolean,
-    setFirstTime: (val: boolean) => void
+    tutorialStage: number,
+    setTutorialStage: (val: number) => void
 }
 
-const TutorialStage1 = ({ firstTime, setFirstTime }: TutorialProps) => {
+const TutorialStage1 = ({ tutorialStage, setTutorialStage }: TutorialProps) => {
+
+
     return (
         <Modal
-            visible={true}
+            visible={tutorialStage === 1}
             transparent={true}
             animationType='slide'
             onRequestClose={() => { }}
@@ -30,7 +32,7 @@ const TutorialStage1 = ({ firstTime, setFirstTime }: TutorialProps) => {
                     </Text>
 
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.buttonStyle}>
+                        <TouchableOpacity style={styles.buttonStyle} onPress={() => setTutorialStage(2)}>
                             <Text style={styles.buttonText}>Continue</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.buttonStyle}>

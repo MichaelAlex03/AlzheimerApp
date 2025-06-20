@@ -1,5 +1,6 @@
 package com.spring.alzheimers.service;
 
+import com.spring.alzheimers.dto.UpdateUserDto;
 import com.spring.alzheimers.model.User;
 import com.spring.alzheimers.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,12 @@ public class UserService {
 
     public Optional<User> getUserInfo(String email){
         return userRepository.findByEmail(email);
+    }
+
+    public void updateUser(UpdateUserDto updateUserDto){
+        User user = userRepository.findByEmail(updateUserDto.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+
     }
 }

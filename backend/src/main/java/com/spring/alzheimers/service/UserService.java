@@ -26,6 +26,24 @@ public class UserService {
         User user = userRepository.findByEmail(updateUserDto.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
+        if(updateUserDto.getFirstTime() != null){
+            user.setFirstTime(updateUserDto.getFirstTime());
+        }
 
+        if(updateUserDto.getEmail() != null){
+            user.setEmail(updateUserDto.getEmail());
+        }
+
+        if(updateUserDto.getPassword() != null){
+            user.setPassword(updateUserDto.getPassword());
+        }
+
+        if(updateUserDto.getFirstName() != null){
+            user.setFirstName(updateUserDto.getFirstName());
+        }
+
+        if(updateUserDto.getLastName() != null){
+            user.setLastName(updateUserDto.getLastName());
+        }
     }
 }

@@ -35,6 +35,7 @@ public class User implements UserDetails {
     private String email;
 
     @Column(nullable = false)
+    @Setter
     private String password;
     @Setter
     private Boolean enabled;

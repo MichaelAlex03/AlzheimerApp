@@ -7,7 +7,8 @@ interface AuthProps {
     enabled: boolean
     userId: number,
     firstName: string,
-    lastName: string
+    lastName: string,
+    firstTime: boolean
 }
 
 interface AuthContextType{

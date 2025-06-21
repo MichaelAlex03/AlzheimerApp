@@ -19,7 +19,7 @@ export default function Index() {
           <CustomButton
             title={"Login"}
             width={270}
-            onPress={() => (router.push('/(tabs)/Home'))}
+            onPress={() => (router.push('/Login'))}
           />
           <CustomButton
             title={"Sign Up"}

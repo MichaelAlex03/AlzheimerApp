@@ -1,6 +1,7 @@
 import axios from '@/api/axios';
 import ProfileSideBar from '@/components/ProfileSideBar';
 import TutorialStage1 from '@/components/Tutorial/TutorialStage1';
+import TutorialStage2 from '@/components/Tutorial/TutorialStage2';
 import { COLORS, LOGOUT_URL } from '@/constants';
 import useAuth from '@/hooks/useAuth';
 import { useRouter } from 'expo-router';
@@ -19,7 +20,6 @@ const Landing = () => {
 
   const [toggleSideBar, setToggleSideBar] = useState(false);
   const [firstTime, setFirstTime] = useState(true);
-  const [tutorialStage, setTutorialStage] = useState(1);
   const [tutorialMode, setTutorialMode] = useState(false);
 
 
@@ -136,8 +136,8 @@ const Landing = () => {
         </TouchableOpacity>
       </View>
 
-      {tutorialStage === 1 && (
-        <TutorialStage1 tutorialStage={tutorialStage} setTutorialStage={setTutorialStage} />
+      {firstTime && (
+        <TutorialStage1 />
       )}
     </SafeAreaView>
   );

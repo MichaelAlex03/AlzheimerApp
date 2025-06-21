@@ -31,7 +31,8 @@ const Login = () => {
         enabled: response.data.enabled,
         userId: response.data.userId,
         firstName: response.data.firstName,
-        lastName: response.data.lastName
+        lastName: response.data.lastName,
+        firstTime: response.data.firstTime
       })
 
       setIsLoggedIn(true);

@@ -23,6 +23,7 @@ public class UserService {
     }
 
     public void updateUser(UpdateUserDto updateUserDto){
+        System.out.println("INPUT" + updateUserDto);
         User user = userRepository.findByEmail(updateUserDto.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -45,5 +46,7 @@ public class UserService {
         if(updateUserDto.getLastName() != null){
             user.setLastName(updateUserDto.getLastName());
         }
+
+        userRepository.save(user);
     }
 }

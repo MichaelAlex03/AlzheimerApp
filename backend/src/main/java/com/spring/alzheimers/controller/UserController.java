@@ -14,14 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService){
         this.userService = userService;
     }
 
-    @PatchMapping("/")
+    @PatchMapping
     public ResponseEntity<ApiResponseDto> updateUser(@RequestBody UpdateUserDto updateUserDto){
+        System.out.println("Hello");
         userService.updateUser(updateUserDto);
         return ResponseEntity
                 .status(HttpStatus.OK)

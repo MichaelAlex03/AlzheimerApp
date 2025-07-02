@@ -43,11 +43,11 @@ const SignUpHelp = () => {
         data={steps}
         onProgressChange={progress}
         renderItem={({ item }) => (
-  <View style={styles.slide}>
-    <Text style={styles.stepText}>{item.title}</Text>
-    <Text style={styles.descriptionText}>{item.description}</Text>
-  </View>
-)}
+          <View style={styles.slide}>
+            <Text style={styles.stepText}>{item.title}</Text>
+            <Text style={styles.descriptionText}>{item.description}</Text>
+          </View>
+        )}
       />
       <Pagination.Basic
         progress={progress}
@@ -90,11 +90,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   descriptionText: {
-  color: '#D9D9D9',
-  fontSize: 14,
-  textAlign: 'center',
-  marginTop: 10,
-},
+    color: '#D9D9D9',
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 10,
+  },
   dotStyle: {
     backgroundColor: '#6964A2',
     borderRadius: 50,
@@ -106,17 +106,17 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   ctaButton: {
-  backgroundColor: '#005BBB',
-  paddingVertical: 18,
-  paddingHorizontal: 40,
-  borderRadius: 12,
-  marginTop: 25,
-},
-ctaText: {
-  color: '#fff',
-  fontSize: 16,
-  textAlign: 'center',
-},
+    backgroundColor: '#005BBB',
+    paddingVertical: 18,
+    paddingHorizontal: 40,
+    borderRadius: 12,
+    marginTop: 25,
+  },
+  ctaText: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center',
+  },
 });
 
 export default SignUpHelp;

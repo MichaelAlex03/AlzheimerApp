@@ -20,7 +20,7 @@ const Landing = () => {
 
   const [toggleSideBar, setToggleSideBar] = useState(false);
   const [firstTime, setFirstTime] = useState(true);
-  const [tutorialMode, setTutorialMode] = useState(false);
+  
 
 
   const handleLogout = async () => {
